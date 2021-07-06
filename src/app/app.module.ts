@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/header/header.component';
-import { VideoInputComponent } from './components/video-searcher/video-input/video-input.component';
-import { VideoPreviewComponent } from './components/video-searcher/video-preview/video-preview.component';
-import { VideoFilterComponent } from './components/video-playlist/video-filter/video-filter.component';
-import { VideoListComponent } from './components/video-playlist/video-list/video-list.component';
+import { HeaderComponent } from '@header/header.component';
+import { VideoInputComponent } from '@video-input/video-input.component';
+import { VideoPreviewComponent } from '@video-preview/video-preview.component';
+import { VideoFilterComponent } from '@video-filter/video-filter.component';
+import { VideoListComponent } from '@video-list/video-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,12 @@ import { VideoListComponent } from './components/video-playlist/video-list/video
     VideoFilterComponent,
     VideoListComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
