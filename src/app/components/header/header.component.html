@@ -1,1 +1,23 @@
-<p>header works!</p>
+<mat-toolbar class="header">
+  <a routerLink="/" class="header__title" (click)="onLogoClick()">VideoApp</a>
+  <nav>
+    <ul class="header__action">
+      <li>
+        <a
+          routerLink="/add-video"
+          class="header__action-link header__action-link--accent"
+          (click)="onSelect($event)"
+          >ADD VIDEO</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/playlist"
+          class="header__action-link"
+          (click)="onSelect($event)"
+          >PLAYLIST</a
+        >
+      </li>
+    </ul>
+  </nav>
+</mat-toolbar>
