@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgForm, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-video-input',
   templateUrl: './video-input.component.html',
-  styleUrls: ['./video-input.component.scss']
+  styleUrls: ['./video-input.component.scss'],
 })
-export class VideoInputComponent implements OnInit {
+export class VideoInputComponent {
+  videoService = new FormControl('', Validators.required);
 
-  constructor() { }
+  onSubmit(form: NgForm): void {
+    const videoUrl = form.value.videoUrl;
+    const videoService = form.value.videoService;
 
-  ngOnInit(): void {
+    console.log(videoUrl, videoService);
+
+    form.resetForm();
   }
-
 }
