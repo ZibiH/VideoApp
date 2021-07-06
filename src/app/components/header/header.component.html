@@ -1,17 +1,20 @@
 <mat-toolbar class="header">
-  <a href="/" class="header__title" (click)="onLogoClick()">VideoApp</a>
+  <a routerLink="/" class="header__title" (click)="onLogoClick()">VideoApp</a>
   <nav>
     <ul class="header__action">
       <li>
         <a
-          href="/"
+          routerLink="/add-video"
           class="header__action-link header__action-link--accent"
           (click)="onSelect($event)"
           >ADD VIDEO</a
         >
       </li>
       <li>
-        <a href="/" class="header__action-link" (click)="onSelect($event)"
+        <a
+          routerLink="/playlist"
+          class="header__action-link"
+          (click)="onSelect($event)"
           >PLAYLIST</a
         >
       </li>
