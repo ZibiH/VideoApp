@@ -11,7 +11,10 @@
         ngModel
         required
       />
-      <mat-error *ngIf="videoUrl.hasError('required')">
+      <mat-error
+        class="search__form-error"
+        *ngIf="videoUrl.hasError('required')"
+      >
         Must provide video link or id!
       </mat-error>
     </mat-form-field>
@@ -21,7 +24,10 @@
         <mat-option value="youtube">Youtube</mat-option>
         <mat-option value="vimeo">Vimeo</mat-option>
       </mat-select>
-      <mat-error *ngIf="service.hasError('required')">
+      <mat-error
+        class="search__form-error"
+        *ngIf="service.hasError('required')"
+      >
         Must choose video service!
       </mat-error>
     </mat-form-field>
