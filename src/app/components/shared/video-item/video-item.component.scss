@@ -9,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.65);
+    overflow: hidden;
 
     &__img {
       height: 90%;
@@ -69,6 +70,41 @@
 
     &__actions {
       display: none;
+    }
+
+    &__modal {
+      display: none;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 10;
+
+      &-iframe {
+        position: absolute;
+        width: 95%;
+        max-height: 90vh;
+        aspect-ratio: 16/10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.55);
+        z-index: -1;
+      }
+    }
+
+    &__modal.isActive {
+      display: block;
     }
   }
 
