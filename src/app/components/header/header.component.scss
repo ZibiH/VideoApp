@@ -1,14 +1,21 @@
 .header {
-  display: flex;
   background-color: #161010;
-  justify-content: space-between;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
 
   &__title {
     color: #fff;
     font-size: 1.3rem;
     font-weight: bold;
     font-style: italic;
-    margin-left: 0.8rem;
+    margin-left: 1.2rem;
     text-decoration: none;
   }
 
@@ -48,7 +55,7 @@
     }
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 624px) {
     &__title {
       font-size: 1.5rem;
     }
@@ -57,12 +64,13 @@
       &-link {
         font-size: 1.2rem;
         padding: 0.4rem;
-        margin-right: 1rem;
+        margin-right: 1.2rem;
         text-decoration: none;
         cursor: pointer;
 
         &--accent {
           color: #c30000;
+          margin-right: 2.4rem;
         }
       }
     }
