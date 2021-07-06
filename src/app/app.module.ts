@@ -11,6 +11,7 @@ import { VideoInputComponent } from '@video-input/video-input.component';
 import { VideoPreviewComponent } from '@video-preview/video-preview.component';
 import { VideoFilterComponent } from '@video-filter/video-filter.component';
 import { VideoListComponent } from '@video-list/video-list.component';
+import { VideoItemComponent } from './components/shared/video-item/video-item.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { VideoListComponent } from '@video-list/video-list.component';
     VideoPreviewComponent,
     VideoFilterComponent,
     VideoListComponent,
+    VideoItemComponent,
   ],
   imports: [
     AppRoutingModule,
