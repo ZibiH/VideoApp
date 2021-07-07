@@ -9,14 +9,21 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.65);
+    overflow: hidden;
 
     &__img {
       height: 90%;
       margin-left: 0.8rem;
+      cursor: pointer;
+      transition: transform 0.3s ease-out;
 
       .preview-img {
         width: auto;
         height: 100%;
+      }
+
+      &:hover {
+        transform: scale(1.05);
       }
     }
 
@@ -69,6 +76,54 @@
 
     &__actions {
       display: none;
+    }
+
+    &__modal {
+      display: flex;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+
+      &-card {
+        display: flex;
+        width: 80%;
+        height: 80%;
+        min-height: 30rem;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(5px);
+
+        &-iframe {
+          width: 100%;
+          height: 70%;
+          border-radius: 4px;
+          overflow: hidden;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+        }
+      }
+
+      &::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: -1;
+      }
+
+      &-close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 
