@@ -1,6 +1,6 @@
 <div data-display="preview">
   <div class="video-container">
-    <div class="video-container__img" (click)="onShowModal()">
+    <div class="video-container__img" (click)="onToggleModal()">
       <img
         class="preview-img"
         src="//i.ytimg.com/vi/ZZjnfWx0cvw/sddefault.jpg"
@@ -32,9 +32,10 @@
       <mat-icon>delete_outline</mat-icon>
     </div>
     <div
-      class="video-container__modal isActive"
+      class="video-container__modal"
       id="modal"
       *ngIf="isModalActive"
+      (click)="onBackdropClick($event)"
     >
       <mat-card class="video-container__modal-card">
         <mat-card-header>
@@ -53,7 +54,7 @@
           ></iframe>
         </div>
         <mat-card-actions class="video-container__modal-close">
-          <button mat-fab color="warn" (click)="onCloseModal()">close</button>
+          <button mat-fab color="warn" (click)="onToggleModal()">close</button>
         </mat-card-actions>
       </mat-card>
     </div>
