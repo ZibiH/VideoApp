@@ -79,7 +79,7 @@
     }
 
     &__modal {
-      display: none;
+      display: flex;
       position: absolute;
       width: 100vw;
       height: 100vh;
@@ -124,10 +124,6 @@
         justify-content: center;
         align-items: center;
       }
-    }
-
-    &__modal.isActive {
-      display: flex;
     }
   }
 

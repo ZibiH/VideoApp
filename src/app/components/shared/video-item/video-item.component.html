@@ -31,7 +31,11 @@
       <mat-icon>play_circle</mat-icon>
       <mat-icon>delete_outline</mat-icon>
     </div>
-    <div class="video-container__modal" id="modal">
+    <div
+      class="video-container__modal isActive"
+      id="modal"
+      *ngIf="isModalActive"
+    >
       <mat-card class="video-container__modal-card">
         <mat-card-header>
           <mat-card-title>Title usually is not too long</mat-card-title>

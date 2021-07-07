@@ -6,15 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./video-item.component.scss'],
 })
 export class VideoItemComponent implements OnInit {
+  isModalActive = false;
+
   constructor() {}
 
   ngOnInit(): void {}
 
   onShowModal() {
-    document.querySelector('#modal')?.classList.add('isActive');
+    this.isModalActive = true;
   }
 
   onCloseModal() {
-    document.querySelector('#modal')?.classList.remove('isActive');
+    this.isModalActive = false;
   }
 }
