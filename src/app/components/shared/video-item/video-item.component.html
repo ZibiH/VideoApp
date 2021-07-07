@@ -1,6 +1,6 @@
 <div data-display="preview">
   <div class="video-container">
-    <div class="video-container__img">
+    <div class="video-container__img" (click)="onShowModal()">
       <img
         class="preview-img"
         src="//i.ytimg.com/vi/ZZjnfWx0cvw/sddefault.jpg"
@@ -31,7 +31,7 @@
       <mat-icon>play_circle</mat-icon>
       <mat-icon>delete_outline</mat-icon>
     </div>
-    <div class="video-container__modal isActive">
+    <div class="video-container__modal" id="modal">
       <mat-card class="video-container__modal-card">
         <mat-card-header>
           <mat-card-title>Title usually is not too long</mat-card-title>
@@ -49,7 +49,7 @@
           ></iframe>
         </div>
         <mat-card-actions class="video-container__modal-close">
-          <button mat-fab color="warn">close</button>
+          <button mat-fab color="warn" (click)="onCloseModal()">close</button>
         </mat-card-actions>
       </mat-card>
     </div>
