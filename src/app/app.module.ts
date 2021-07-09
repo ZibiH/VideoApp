@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { VideoItemComponent } from './components/shared/video-item/video-item.co
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
