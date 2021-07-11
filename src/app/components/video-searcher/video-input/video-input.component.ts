@@ -12,7 +12,7 @@ import { Video } from '@app/models/video';
 })
 export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
-  previewVideo: Video | undefined;
+  videos: Video[] = [];
 
   constructor(private vsService: VideoSearchService) {}
 
@@ -22,11 +22,13 @@ export class VideoInputComponent {
 
     // console.log(videoUrl, videoService);
     this.vsService.fetchVideoServerData().subscribe((videos: Video[]) => {
-      this.previewVideo = videos.find((video: Video) => {
+      const vid = videos.find((video: Video) => {
         return video.id === videoUrl;
       });
-      console.log(this.previewVideo);
+      if (vid) {
+        this.videos?.push(vid);
+      }
+      form.resetForm();
     });
-    form.resetForm();
   }
 }

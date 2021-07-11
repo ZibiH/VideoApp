@@ -7,23 +7,27 @@
       />
     </div>
     <div class="video-container__info">
-      <h2 class="video-container__info-title">Title usually is not too long</h2>
+      <h2 class="video-container__info-title">{{ video.title }}</h2>
       <p class="video-container__info-description">
-        description text up to 50 chracters 14 reudndant
+        {{ video.description }}
       </p>
     </div>
     <div class="video-container__stats">
       <div class="video-container__stats-item">
         <mat-icon class="video-container__stats-icon">visibility</mat-icon>
-        <span class="video-container__stats-text">123,456</span>
+        <span class="video-container__stats-text">{{
+          video.views | number
+        }}</span>
       </div>
       <div class="video-container__stats-item">
         <mat-icon class="video-container__stats-icon">thumb_up</mat-icon>
-        <span class="video-container__stats-text">12,345</span>
+        <span class="video-container__stats-text">{{
+          video.likes | number
+        }}</span>
       </div>
       <div class="video-container__stats-item">
         <mat-icon class="video-container__stats-icon">calendar_today</mat-icon>
-        <span class="video-container__stats-text">23 May 2015</span>
+        <span class="video-container__stats-text">{{ video.date | date }}</span>
       </div>
     </div>
     <div class="video-container__actions">
@@ -39,9 +43,9 @@
     >
       <mat-card class="video-container__modal-card">
         <mat-card-header>
-          <mat-card-title>Title usually is not too long</mat-card-title>
+          <mat-card-title>{{ video.title }}</mat-card-title>
           <mat-card-subtitle>
-            description text up to 50 chracters 14 reudndant
+            {{ video.description }}
           </mat-card-subtitle>
         </mat-card-header>
         <div class="video-container__modal-card-iframe">
