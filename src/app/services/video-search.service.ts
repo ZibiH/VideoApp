@@ -13,14 +13,14 @@ export class VideoSearchService {
 
   constructor(private http: HttpClient) {}
 
-  fetchVideoServerData(): Observable<Video> {
-    return this.http.get<Video>(this.videoLocalApiUrl);
+  fetchVideoServerData(): Observable<Video[]> {
+    return this.http.get<Video[]>(this.videoLocalApiUrl);
   }
 
   fetchVideoApiData(videoInput: {
     videoUrl: string;
     videoService: string;
-  }): Observable<Video> {
-    return this.http.get<Video>(videoInput.videoUrl);
+  }): Observable<Video[]> {
+    return this.http.get<Video[]>(videoInput.videoUrl);
   }
 }
