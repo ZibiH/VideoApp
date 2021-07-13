@@ -4,6 +4,7 @@ import { NgForm, FormControl, Validators } from '@angular/forms';
 import { VideoSearchService } from '@app/services/video-search.service';
 
 import { Video } from '@app/models/video';
+import { InputData } from '@app/models/input-data';
 
 @Component({
   selector: 'app-video-input',
@@ -20,7 +21,7 @@ export class VideoInputComponent {
     const videoUrl = form.value.videoUrl;
     const videoService = form.value.videoService;
 
-    // console.log(videoUrl, videoService);
+    // TODO: add correct fetching video preview (the current fn works with the given id and local server only)
     this.vsService.fetchVideoServerData().subscribe((videos: Video[]) => {
       const vid = videos.find((video: Video) => {
         return video.id === videoUrl;
@@ -28,7 +29,7 @@ export class VideoInputComponent {
       if (vid) {
         this.videos?.push(vid);
       }
-      form.resetForm();
     });
+    form.resetForm();
   }
 }
