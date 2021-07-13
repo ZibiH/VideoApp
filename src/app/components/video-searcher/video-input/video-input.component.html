@@ -1,44 +1,46 @@
-<mat-toolbar class="search">
-  <form class="search__form" #video="ngForm" (ngSubmit)="onSubmit(video)">
-    <mat-form-field class="search__field">
-      <input
-        matInput
-        type="text"
-        class="search__field-input"
-        placeholder="Video link or id"
-        name="videoUrl"
-        #videoUrl="ngModel"
-        ngModel
-        required
-      />
-      <mat-error
-        class="search__form-error"
-        *ngIf="videoUrl.hasError('required')"
+<section>
+  <mat-toolbar class="search">
+    <form class="search__form" #video="ngForm" (ngSubmit)="onSubmit(video)">
+      <mat-form-field class="search__field">
+        <input
+          matInput
+          type="text"
+          class="search__field-input"
+          placeholder="Video link or id"
+          name="videoUrl"
+          #videoUrl="ngModel"
+          ngModel
+          required
+        />
+        <mat-error
+          class="search__form-error"
+          *ngIf="videoUrl.hasError('required')"
+        >
+          Must provide video link or id!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="search__select">
+        <mat-select #service="ngModel" name="videoService" ngModel required>
+          <mat-option>---</mat-option>
+          <mat-option value="youtube">Youtube</mat-option>
+          <mat-option value="vimeo">Vimeo</mat-option>
+        </mat-select>
+        <mat-error
+          class="search__form-error"
+          *ngIf="service.hasError('required')"
+        >
+          Must choose video service!
+        </mat-error>
+      </mat-form-field>
+      <button
+        mat-fab
+        class="search__button-add"
+        type="submit"
+        [disabled]="video.invalid"
       >
-        Must provide video link or id!
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="search__select">
-      <mat-select #service="ngModel" name="videoService" ngModel required>
-        <mat-option>---</mat-option>
-        <mat-option value="youtube">Youtube</mat-option>
-        <mat-option value="vimeo">Vimeo</mat-option>
-      </mat-select>
-      <mat-error
-        class="search__form-error"
-        *ngIf="service.hasError('required')"
-      >
-        Must choose video service!
-      </mat-error>
-    </mat-form-field>
-    <button
-      mat-fab
-      class="search__button-add"
-      type="submit"
-      [disabled]="video.invalid"
-    >
-      FIND
-    </button>
-  </form>
-</mat-toolbar>
-<app-video-preview></app-video-preview>
+        FIND
+      </button>
+    </form>
+  </mat-toolbar>
+  <app-video-item *ngFor="let vid of videos" [video]="vid"></app-video-item>
+</section>

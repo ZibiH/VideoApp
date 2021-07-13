@@ -12,8 +12,7 @@
       "@services/*": ["app/services/*"],
       "@video-filter/*": ["app/components/video-playlist/video-filter/*"],
       "@video-input/*": ["app/components/video-searcher/video-input/*"],
-      "@video-list/*": ["app/components/video-playlist/video-list/*"],
-      "@video-preview/*": ["app/components/video-searcher/video-preview/*"]
+      "@video-list/*": ["app/components/video-playlist/video-list/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
