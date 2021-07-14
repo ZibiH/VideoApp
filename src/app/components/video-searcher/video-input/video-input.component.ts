@@ -18,19 +18,6 @@ export class VideoInputComponent {
   constructor(private vsService: VideoSearchService) {}
 
   onSubmit(form: NgForm): void {
-    // const videoUrl = form.value.videoUrl;
-    // const videoService = form.value.videoService;
-
-    // TODO: add correct fetching video preview (the current fn works with the given id and local server only)
-    // this.vsService.fetchVideoServerData().subscribe((videos: Video[]) => {
-    //   const vid = videos.find((video: Video) => {
-    //     return video.id === videoUrl;
-    //   });
-    //   if (vid) {
-    //     this.videos?.push(vid);
-    //   }
-    // });
-
     // Fetch online API
     const videoData: InputData = {
       videoUrl: form.value.videoUrl,
