@@ -13,7 +13,9 @@ import { InputData } from '@app/models/input-data';
 export class VideoSearchService {
   private env = environment;
   private servData = this.env.servicesData;
+
   private videoLocalApiUrl = 'http://localhost:5000/videos';
+
   private credentials = btoa(
     `${this.env.credentials.clientId}:${this.env.credentials.clientSecret}`
   );
@@ -33,9 +35,17 @@ export class VideoSearchService {
   fetchVideoApiData(videoData: InputData): Observable<Video[]> {
     const apiUrl = this.getProperVideoUrl(videoData);
     if (videoData.videoService === 'vimeo') {
-      return this.http.get<Video[]>(apiUrl, this.vimeoHeaders);
+      return this.fetchVimeoVideoData(apiUrl);
     }
+    return this.fetchYoutubeVideoData(apiUrl);
+  }
+
+  private fetchYoutubeVideoData(apiUrl: string) {
     return this.http.get<Video[]>(apiUrl);
+  }
+
+  private fetchVimeoVideoData(apiUrl: string) {
+    return this.http.get<Video[]>(apiUrl, this.vimeoHeaders);
   }
 
   private getProperVideoUrl(videoData: InputData): string {
