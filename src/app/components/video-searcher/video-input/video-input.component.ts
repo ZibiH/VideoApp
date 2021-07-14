@@ -4,6 +4,7 @@ import { NgForm, FormControl, Validators } from '@angular/forms';
 import { VideoSearchService } from '@app/services/video-search.service';
 
 import { Video } from '@app/models/video';
+import { InputData } from '@app/models/input-data';
 
 @Component({
   selector: 'app-video-input',
@@ -17,18 +18,16 @@ export class VideoInputComponent {
   constructor(private vsService: VideoSearchService) {}
 
   onSubmit(form: NgForm): void {
-    const videoUrl = form.value.videoUrl;
-    const videoService = form.value.videoService;
+    // Fetch online API
+    const videoData: InputData = {
+      videoUrl: form.value.videoUrl,
+      videoService: form.value.videoService,
+    };
 
-    // console.log(videoUrl, videoService);
-    this.vsService.fetchVideoServerData().subscribe((videos: Video[]) => {
-      const vid = videos.find((video: Video) => {
-        return video.id === videoUrl;
-      });
-      if (vid) {
-        this.videos?.push(vid);
-      }
-      form.resetForm();
-    });
+    this.vsService
+      .fetchVideoApiData(videoData)
+      .subscribe((video) => (this.videos = [video]));
+
+    form.resetForm();
   }
 }
