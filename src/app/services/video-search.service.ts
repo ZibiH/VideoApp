@@ -9,6 +9,7 @@ import { environment } from '@environments/environment';
 import { Video } from '@app/models/video';
 import { InputData } from '@app/models/input-data';
 import { Youtube } from '@app/models/youtube';
+import { Vimeo } from '@app/models/vimeo';
 
 @Injectable({
   providedIn: 'root',
@@ -64,8 +65,28 @@ export class VideoSearchService {
     );
   }
 
-  private fetchVimeoVideoData(apiUrl: string) {
-    return this.http.get<Video>(apiUrl, this.vimeoHeaders);
+  private fetchVimeoVideoData(apiUrl: string): Observable<Video> {
+    const vimeoId = this.extractIdFromInputData({
+      videoUrl: apiUrl,
+      videoService: 'vimeo',
+    });
+    return this.http.get<Vimeo>(apiUrl, this.vimeoHeaders).pipe(
+      map((videoData: Vimeo) => {
+        console.log(videoData);
+        const video = {
+          id: vimeoId,
+          title: videoData.name || 'name',
+          description: videoData.description,
+          service: 'vimeo',
+          src: this.vimeoEnv.iframeUrl + vimeoId,
+          likes: videoData.metadata.connections.likes.total.toString(),
+          views: '0',
+          favourites: false,
+          date: Date.now(),
+        };
+        return video;
+      })
+    );
   }
 
   private getProperVideoUrl(videoData: InputData): string {
