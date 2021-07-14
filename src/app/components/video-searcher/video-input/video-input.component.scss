@@ -40,11 +40,33 @@
     margin-left: 2rem;
   }
 
-  &__button-add {
+  &__button--find {
     color: #fff;
     background-color: #c30000;
     font-size: 1rem;
     font-weight: bold;
     margin-left: 1rem;
+  }
+
+  &__action-options {
+    width: 100%;
+    text-align: center;
+
+    &--add,
+    &--cancel {
+      margin: 0.5rem 1rem;
+    }
+
+    &--cancel {
+      color: #e9e9e9;
+      background-color: #c30000;
+    }
+
+    &--add:hover,
+    &--add:focus,
+    &--cancel:hover,
+    &--cancel:focus {
+      opacity: 0.7;
+    }
   }
 }
