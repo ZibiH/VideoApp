@@ -13,7 +13,7 @@
       </p>
     </div>
     <div class="video-container__stats">
-      <div class="video-container__stats-item">
+      <div class="video-container__stats-item" *ngIf="video.views">
         <mat-icon class="video-container__stats-icon">visibility</mat-icon>
         <span class="video-container__stats-text">{{
           video.views | number
