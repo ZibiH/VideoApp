@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -32,7 +33,7 @@ export class VideoSearchService {
   };
   videoList: Video[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   fetchVideoServerData(): Observable<Video[]> {
     return this.http.get<Video[]>(this.videoLocalApiUrl);
@@ -49,12 +50,16 @@ export class VideoSearchService {
   private fetchYoutubeVideoData(apiUrl: string): Observable<Video> {
     return this.http.get<Youtube>(apiUrl).pipe(
       map((videoData: Youtube) => {
+        const safeSrc = this.sanitizeVideoSrc(
+          this.youtubeEnv.iframeUrl + videoData.items[0].id
+        );
+
         const video = {
           id: videoData.items[0].id,
           title: videoData.items[0].snippet.title,
           description: videoData.items[0].snippet.description.slice(0, 80),
-          service: 'youtube',
-          src: this.youtubeEnv.iframeUrl + videoData.items[0].id,
+          service: this.youtubeEnv.service,
+          src: safeSrc,
           likes: videoData.items[0].statistics.likeCount,
           views: videoData.items[0].statistics.viewCount,
           favourites: false,
@@ -66,21 +71,24 @@ export class VideoSearchService {
   }
 
   private fetchVimeoVideoData(apiUrl: string): Observable<Video> {
-    const vimeoId = this.extractIdFromInputData({
-      videoUrl: apiUrl,
-      videoService: 'vimeo',
-    });
     return this.http.get<Vimeo>(apiUrl, this.vimeoHeaders).pipe(
       map((videoData: Vimeo) => {
         console.log(videoData);
+        const vimeoId = this.extractIdFromInputData({
+          videoUrl: videoData.link,
+          videoService: 'vimeo',
+        });
+        const safeSrc = this.sanitizeVideoSrc(
+          this.vimeoEnv.iframeUrl + vimeoId
+        );
+
         const video = {
           id: vimeoId,
-          title: videoData.name || 'name',
+          title: videoData.name,
           description: videoData.description,
-          service: 'vimeo',
-          src: this.vimeoEnv.iframeUrl + vimeoId,
+          service: this.vimeoEnv.service,
+          src: safeSrc,
           likes: videoData.metadata.connections.likes.total.toString(),
-          views: '0',
           favourites: false,
           date: Date.now(),
         };
@@ -114,5 +122,10 @@ export class VideoSearchService {
     const pattern = new RegExp(regEx, flags);
     const extractedId = videoData.videoUrl.replace(pattern, replaceValue);
     return extractedId;
+  }
+
+  private sanitizeVideoSrc(unsafeSrc: string): SafeResourceUrl {
+    const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeSrc);
+    return safeUrl;
   }
 }
