@@ -1,10 +1,7 @@
 <div data-display="preview">
   <div class="video-container">
     <div class="video-container__img" (click)="onToggleModal()">
-      <img
-        class="preview-img"
-        src="//i.ytimg.com/vi/ZZjnfWx0cvw/sddefault.jpg"
-      />
+      <img class="preview-img" [src]="video.picture" />
     </div>
     <div class="video-container__info">
       <h2 class="video-container__info-title">{{ video.title }}</h2>

@@ -55,11 +55,12 @@ export class VideoSearchService {
         );
 
         const video = {
+          service: this.youtubeEnv.service,
           id: videoData.items[0].id,
           title: videoData.items[0].snippet.title,
           description: videoData.items[0].snippet.description.slice(0, 80),
-          service: this.youtubeEnv.service,
           src: safeSrc,
+          picture: videoData.items[0].snippet.thumbnails.standard.url,
           likes: videoData.items[0].statistics.likeCount,
           views: videoData.items[0].statistics.viewCount,
           favourites: false,
@@ -83,11 +84,12 @@ export class VideoSearchService {
         );
 
         const video = {
+          service: this.vimeoEnv.service,
           id: vimeoId,
           title: videoData.name,
           description: videoData.description,
-          service: this.vimeoEnv.service,
           src: safeSrc,
+          picture: videoData.pictures.sizes[3].link,
           likes: videoData.metadata.connections.likes.total.toString(),
           favourites: false,
           date: Date.now(),
