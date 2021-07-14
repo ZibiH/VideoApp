@@ -39,7 +39,7 @@ export class VideoInputComponent {
 
     this.vsService
       .fetchVideoApiData(videoData)
-      .subscribe((video) => console.log(video));
+      .subscribe((video) => (this.videos = [video]));
 
     form.resetForm();
   }
