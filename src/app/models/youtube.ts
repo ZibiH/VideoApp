@@ -5,7 +5,11 @@ export interface Youtube {
     snippet: {
       title: string;
       description: string;
-      thumbnails: { standard: { url: string } };
+      thumbnails: {
+        default: { url: string };
+        medium: { url: string };
+        high: { url: string };
+      };
     };
     statistics: { viewCount: string; likeCount: string };
   }[];

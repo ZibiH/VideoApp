@@ -50,6 +50,8 @@ export class VideoSearchService {
   private fetchYoutubeVideoData(apiUrl: string): Observable<Video> {
     return this.http.get<Youtube>(apiUrl).pipe(
       map((videoData: Youtube) => {
+        console.log(videoData);
+
         const safeSrc = this.sanitizeVideoSrc(
           this.youtubeEnv.iframeUrl + videoData.items[0].id
         );
@@ -60,7 +62,7 @@ export class VideoSearchService {
           title: videoData.items[0].snippet.title,
           description: videoData.items[0].snippet.description.slice(0, 80),
           src: safeSrc,
-          picture: videoData.items[0].snippet.thumbnails.standard.url,
+          picture: videoData.items[0].snippet.thumbnails.high.url,
           likes: videoData.items[0].statistics.likeCount,
           views: videoData.items[0].statistics.viewCount,
           favourites: false,

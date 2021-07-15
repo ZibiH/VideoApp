@@ -13,6 +13,7 @@ import { InputData } from '@app/models/input-data';
 })
 export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
+  showingPreview = false;
   videos: Video[] = [];
 
   constructor(private vsService: VideoSearchService) {}
@@ -29,5 +30,6 @@ export class VideoInputComponent {
       .subscribe((video) => (this.videos = [video]));
 
     form.resetForm();
+    this.showingPreview = true;
   }
 }
