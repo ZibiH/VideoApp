@@ -32,4 +32,13 @@ export class VideoInputComponent {
     form.resetForm();
     this.showingPreview = true;
   }
+
+  onAddVideo(): void {
+    console.log(this.videos);
+  }
+
+  onCancelVideo(): void {
+    this.videos = [];
+    this.showingPreview = false;
+  }
 }

@@ -48,13 +48,14 @@
       mat-raised-button
       class="search__action-options--add"
       color="primary"
+      (click)="onAddVideo()"
     >
       Add video to your list!
     </button>
     <button
       mat-raised-button
       class="search__action-options--cancel"
-      *ngIf="showingPreview"
+      (click)="onCancelVideo()"
     >
       Look for another...
     </button>
