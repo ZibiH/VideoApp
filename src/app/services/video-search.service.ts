@@ -21,8 +21,6 @@ export class VideoSearchService {
   private youtubeEnv = this.servData[0];
   private vimeoEnv = this.servData[1];
 
-  private videoLocalApiUrl = 'http://localhost:5000/videos';
-
   private credentials = btoa(
     `${this.env.credentials.clientId}:${this.env.credentials.clientSecret}`
   );
@@ -35,10 +33,6 @@ export class VideoSearchService {
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
-  fetchVideoServerData(): Observable<Video[]> {
-    return this.http.get<Video[]>(this.videoLocalApiUrl);
-  }
-
   fetchVideoApiData(videoData: InputData): Observable<Video> {
     const apiUrl = this.getProperVideoUrl(videoData);
     if (videoData.videoService === 'vimeo') {
@@ -50,8 +44,6 @@ export class VideoSearchService {
   private fetchYoutubeVideoData(apiUrl: string): Observable<Video> {
     return this.http.get<Youtube>(apiUrl).pipe(
       map((videoData: Youtube) => {
-        console.log(videoData);
-
         const safeSrc = this.sanitizeVideoSrc(
           this.youtubeEnv.iframeUrl + videoData.items[0].id
         );
