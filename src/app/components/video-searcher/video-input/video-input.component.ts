@@ -34,7 +34,8 @@ export class VideoInputComponent {
   }
 
   onAddVideo(): void {
-    console.log(this.videos);
+    this.videos[0].date = Date.now();
+    console.log(this.videos[0].src);
   }
 
   onCancelVideo(): void {

@@ -61,12 +61,12 @@ export class VideoSearchService {
           id: videoData.items[0].id,
           title: videoData.items[0].snippet.title,
           description: videoData.items[0].snippet.description.slice(0, 80),
-          src: safeSrc,
+          src: this.youtubeEnv.iframeUrl + videoData.items[0].id,
+          safeSrc: safeSrc,
           picture: videoData.items[0].snippet.thumbnails.high.url,
           likes: videoData.items[0].statistics.likeCount,
           views: videoData.items[0].statistics.viewCount,
           favourites: false,
-          date: Date.now(),
         };
         return video;
       })
@@ -90,11 +90,11 @@ export class VideoSearchService {
           id: vimeoId,
           title: videoData.name,
           description: videoData.description,
-          src: safeSrc,
+          src: this.vimeoEnv.iframeUrl + vimeoId,
+          safeSrc: safeSrc,
           picture: videoData.pictures.sizes[3].link,
           likes: videoData.metadata.connections.likes.total.toString(),
           favourites: false,
-          date: Date.now(),
         };
         return video;
       })
