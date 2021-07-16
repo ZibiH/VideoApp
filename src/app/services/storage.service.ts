@@ -24,14 +24,11 @@ export class StorageService implements OnInit {
   ngOnInit() {}
 
   getSavedVideos() {
-    let storedVideos!: Video[];
-
     if (localStorage.getItem(this.videoLocalStorageKey)) {
       const storageVideos = localStorage.getItem(this.videoLocalStorageKey);
-      storedVideos = storageVideos !== null ? JSON.parse(storageVideos) : [];
+      this.videosStorageList =
+        storageVideos !== null ? JSON.parse(storageVideos) : [];
     }
-
-    this.videosStorageList = storedVideos;
   }
 
   addVideoToList(video: Video) {
@@ -40,7 +37,6 @@ export class StorageService implements OnInit {
       this.videosStorageList.push(video);
     }
     this.setLocalStorageVideoItem();
-    console.log(this.videosStorageList);
   }
 
   checkLocalStorageExistance(): boolean {
@@ -51,9 +47,11 @@ export class StorageService implements OnInit {
   }
 
   checkLocalStorageVideoItem(video: Video): boolean {
-    return this.videosStorageList.filter((vid) => vid.id === video.id)
-      ? true
-      : false;
+    if (!this.videosStorageList) {
+      return false;
+    }
+    const vidExist = this.videosStorageList.find((vid) => vid.id === video.id);
+    return vidExist ? true : false;
   }
 
   setLocalStorageVideoItem() {
@@ -73,7 +71,7 @@ export class StorageService implements OnInit {
 
   addToServerDb(video: Video): void {
     const videoItem = JSON.stringify(video);
-    this.http.put(this.videoLocalApiUrl, videoItem, this.videoLocalApiHeaders);
+    this.http.post(this.videoLocalApiUrl, videoItem, this.videoLocalApiHeaders);
   }
 
   getLocalDbVideos(): Observable<Video[]> {
