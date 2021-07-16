@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm, FormControl, Validators } from '@angular/forms';
 
 import { VideoSearchService } from '@app/services/video-search.service';
+import { StorageService } from '@app/services/storage.service';
 
 import { Video } from '@app/models/video';
 import { InputData } from '@app/models/input-data';
@@ -16,7 +17,10 @@ export class VideoInputComponent {
   showingPreview = false;
   videos: Video[] = [];
 
-  constructor(private vsService: VideoSearchService) {}
+  constructor(
+    private vsService: VideoSearchService,
+    private storage: StorageService
+  ) {}
 
   onSubmit(form: NgForm): void {
     // Fetch online API
@@ -34,7 +38,10 @@ export class VideoInputComponent {
   }
 
   onAddVideo(): void {
-    console.log(this.videos);
+    this.videos[0].date = Date.now();
+    this.storage.addVideoToList(this.videos[0]);
+    this.videos = [];
+    this.showingPreview = false;
   }
 
   onCancelVideo(): void {

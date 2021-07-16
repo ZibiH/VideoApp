@@ -21,8 +21,6 @@ export class VideoSearchService {
   private youtubeEnv = this.servData[0];
   private vimeoEnv = this.servData[1];
 
-  private videoLocalApiUrl = 'http://localhost:5000/videos';
-
   private credentials = btoa(
     `${this.env.credentials.clientId}:${this.env.credentials.clientSecret}`
   );
@@ -35,10 +33,6 @@ export class VideoSearchService {
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
-  fetchVideoServerData(): Observable<Video[]> {
-    return this.http.get<Video[]>(this.videoLocalApiUrl);
-  }
-
   fetchVideoApiData(videoData: InputData): Observable<Video> {
     const apiUrl = this.getProperVideoUrl(videoData);
     if (videoData.videoService === 'vimeo') {
@@ -50,8 +44,6 @@ export class VideoSearchService {
   private fetchYoutubeVideoData(apiUrl: string): Observable<Video> {
     return this.http.get<Youtube>(apiUrl).pipe(
       map((videoData: Youtube) => {
-        console.log(videoData);
-
         const safeSrc = this.sanitizeVideoSrc(
           this.youtubeEnv.iframeUrl + videoData.items[0].id
         );
@@ -61,12 +53,12 @@ export class VideoSearchService {
           id: videoData.items[0].id,
           title: videoData.items[0].snippet.title,
           description: videoData.items[0].snippet.description.slice(0, 80),
-          src: safeSrc,
+          src: this.youtubeEnv.iframeUrl + videoData.items[0].id,
+          safeSrc: safeSrc,
           picture: videoData.items[0].snippet.thumbnails.high.url,
           likes: videoData.items[0].statistics.likeCount,
           views: videoData.items[0].statistics.viewCount,
           favourites: false,
-          date: Date.now(),
         };
         return video;
       })
@@ -90,11 +82,11 @@ export class VideoSearchService {
           id: vimeoId,
           title: videoData.name,
           description: videoData.description,
-          src: safeSrc,
+          src: this.vimeoEnv.iframeUrl + vimeoId,
+          safeSrc: safeSrc,
           picture: videoData.pictures.sizes[3].link,
           likes: videoData.metadata.connections.likes.total.toString(),
           favourites: false,
-          date: Date.now(),
         };
         return video;
       })
@@ -128,7 +120,7 @@ export class VideoSearchService {
     return extractedId;
   }
 
-  private sanitizeVideoSrc(unsafeSrc: string): SafeResourceUrl {
+  sanitizeVideoSrc(unsafeSrc: string): SafeResourceUrl {
     const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeSrc);
     return safeUrl;
   }

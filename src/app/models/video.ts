@@ -5,10 +5,11 @@ export interface Video {
   id: string;
   title: string;
   description: string;
-  src: SafeResourceUrl;
+  safeSrc: SafeResourceUrl;
+  src: string;
   picture?: string;
   likes: string;
   views?: string;
   favourites: boolean;
-  date: number;
+  date?: number;
 }
