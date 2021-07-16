@@ -1,1 +1,13 @@
-<app-video-item *ngFor="let vid of videos" [video]="vid"></app-video-item>
+<section class="playlist" matSort (matSortChange)="sortVideos($event)">
+  <header>
+    <h3 class="playlist__filter-title">Sort by:</h3>
+    <div class="playlist__filter" mat-sort-header="views">Views</div>
+    <div class="playlist__filter" mat-sort-header="likes">Likes</div>
+    <div class="playlist__filter" mat-sort-header="date">Upload date</div>
+  </header>
+
+  <app-video-item
+    *ngFor="let vid of sortedVideos"
+    [video]="vid"
+  ></app-video-item>
+</section>

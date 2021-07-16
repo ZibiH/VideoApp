@@ -20,6 +20,7 @@ export class VideoSearchService {
   private servData = this.env.servicesData;
   private youtubeEnv = this.servData[0];
   private vimeoEnv = this.servData[1];
+  private vimeoViewsCount = '0';
 
   private credentials = btoa(
     `${this.env.credentials.clientId}:${this.env.credentials.clientSecret}`
@@ -68,7 +69,6 @@ export class VideoSearchService {
   private fetchVimeoVideoData(apiUrl: string): Observable<Video> {
     return this.http.get<Vimeo>(apiUrl, this.vimeoHeaders).pipe(
       map((videoData: Vimeo) => {
-        console.log(videoData);
         const vimeoId = this.extractIdFromInputData({
           videoUrl: videoData.link,
           videoService: 'vimeo',
@@ -86,6 +86,7 @@ export class VideoSearchService {
           safeSrc: safeSrc,
           picture: videoData.pictures.sizes[3].link,
           likes: videoData.metadata.connections.likes.total.toString(),
+          views: this.vimeoViewsCount,
           favourites: false,
         };
         return video;
