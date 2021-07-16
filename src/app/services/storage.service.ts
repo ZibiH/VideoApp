@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Video } from '@app/models/video';
+import { VideoSearchService } from './video-search.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,15 +20,23 @@ export class StorageService implements OnInit {
 
   private videosStorageList: Video[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private vsService: VideoSearchService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getSavedVideos();
+  }
 
   getSavedVideos() {
     if (localStorage.getItem(this.videoLocalStorageKey)) {
       const storageVideos = localStorage.getItem(this.videoLocalStorageKey);
       this.videosStorageList =
         storageVideos !== null ? JSON.parse(storageVideos) : [];
+      this.videosStorageList.forEach((video: Video) => {
+        video.safeSrc = this.vsService.sanitizeVideoSrc(video.src);
+      });
     }
   }
 
@@ -57,6 +66,14 @@ export class StorageService implements OnInit {
   setLocalStorageVideoItem() {
     const jsonVideoList = JSON.stringify(this.videosStorageList);
     localStorage.setItem(this.videoLocalStorageKey, jsonVideoList);
+  }
+
+  getVideosList() {
+    if (this.videosStorageList) {
+      this.getSavedVideos();
+      return this.videosStorageList.slice();
+    }
+    return this.videosStorageList;
   }
 
   // ************************

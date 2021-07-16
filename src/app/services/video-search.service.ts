@@ -120,7 +120,7 @@ export class VideoSearchService {
     return extractedId;
   }
 
-  private sanitizeVideoSrc(unsafeSrc: string): SafeResourceUrl {
+  sanitizeVideoSrc(unsafeSrc: string): SafeResourceUrl {
     const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeSrc);
     return safeUrl;
   }
