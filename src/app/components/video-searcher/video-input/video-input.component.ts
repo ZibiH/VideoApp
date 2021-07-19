@@ -5,7 +5,7 @@ import { VideoSearchService } from '@app/services/video-search.service';
 import { StorageService } from '@app/services/storage.service';
 
 import { Video } from '@app/models/video';
-import { InputData } from '@app/models/input-data';
+import { InputData } from '@models/input-data';
 
 @Component({
   selector: 'app-video-input',
