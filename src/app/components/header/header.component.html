@@ -1,6 +1,6 @@
 <mat-toolbar class="header">
   <div class="header__wrapper">
-    <a routerLink="/" class="header__title" (click)="onLogoClick()">VideoApp</a>
+    <a routerLink="/" class="header__title">VideoApp</a>
     <nav>
       <ul class="header__action">
         <li>
@@ -8,18 +8,18 @@
             routerLinkActive="isSelected"
             routerLink="/add-video"
             class="header__action-link header__action-link--accent"
-            (click)="onSelect($event)"
-            >ADD VIDEO</a
           >
+            ADD VIDEO
+          </a>
         </li>
         <li>
           <a
             routerLinkActive="isSelected"
             routerLink="/playlist"
             class="header__action-link"
-            (click)="onSelect($event)"
-            >PLAYLIST</a
           >
+            PLAYLIST
+          </a>
         </li>
       </ul>
     </nav>
