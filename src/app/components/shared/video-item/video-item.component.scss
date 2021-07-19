@@ -4,21 +4,22 @@
     width: 100%;
     max-width: 80rem;
     margin: 0.3rem auto;
-    height: 6rem;
+    height: 5rem;
     gap: 0.4rem;
     justify-content: space-between;
     align-items: center;
-    // border-bottom: 1px solid rgba(0, 0, 0, 0.65);
     overflow: hidden;
 
-    &__img {
+    &__preview {
       height: 90%;
+      max-width: 7rem;
       margin-left: 0.8rem;
       cursor: pointer;
       transition: transform 0.3s ease-out;
 
-      .preview-img {
+      &__img {
         width: auto;
+        max-width: 6rem;
         height: 100%;
       }
 
@@ -34,14 +35,14 @@
       justify-content: center;
 
       &-title {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         line-height: 1.45;
         margin-bottom: 0.2rem;
       }
 
       &-description {
         color: rgba(0, 0, 0, 0.65);
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         line-height: 1.1;
         margin: 0;
       }
@@ -50,7 +51,7 @@
     &__stats {
       display: flex;
       height: 100%;
-      width: 5.5rem;
+      min-width: 5.5rem;
       color: rgba(0, 0, 0, 0.65);
       flex-direction: column;
       align-items: flex-start;
@@ -135,29 +136,34 @@
 
   @media (min-width: 624px) {
     .video-container {
-      height: 8rem;
+      height: 7rem;
 
-      &__img {
+      &__preview {
+        max-width: 8rem;
         margin-left: 1.6rem;
+
+        &__img {
+          max-width: 8rem;
+        }
       }
 
       &__info {
         &-title {
-          font-size: 1.2rem;
+          font-size: 0.9rem;
           line-height: 1.45;
           margin-bottom: 0.3rem;
         }
 
         &-description {
-          font-size: 0.9rem;
-          line-height: 1.1;
+          font-size: 0.7rem;
+          line-height: 1.2;
           margin: 0;
         }
       }
 
       &__stats {
         margin-right: 1.6rem;
-        width: 6.5rem;
+        min-width: 6.5rem;
 
         &-icon {
           width: 18px;
@@ -175,21 +181,26 @@
 
   @media (min-width: 912px) {
     .video-container {
-      height: 12rem;
+      height: 10rem;
 
-      &__img {
+      &__preview {
+        max-width: 12rem;
         margin-left: 1.6rem;
+
+        &__img {
+          max-width: 12rem;
+        }
       }
 
       &__info {
         &-title {
-          font-size: 1.6rem;
+          font-size: 1.3rem;
           line-height: 1.45;
           margin-bottom: 0.3rem;
         }
 
         &-description {
-          font-size: 1rem;
+          font-size: 0.9rem;
           line-height: 1.1;
           margin: 0;
         }

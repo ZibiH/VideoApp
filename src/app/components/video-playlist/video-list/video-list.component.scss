@@ -1,0 +1,88 @@
+.playlist {
+  display: flex;
+  flex-direction: column;
+  background-color: #e5e5e5;
+
+  &__options {
+    display: flex;
+    width: 90%;
+    max-width: 75rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0.5rem 0;
+  }
+
+  &__filter {
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    margin-top: 0.8rem;
+
+    &-title {
+      width: 100%;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    &-items {
+      display: flex;
+    }
+
+    &-item {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      margin-right: 0.6rem;
+    }
+
+    &-item:hover,
+    &-item:focus {
+      color: #c30000;
+    }
+  }
+
+  &__views {
+    display: flex;
+    flex-wrap: nowrap;
+    &__btn {
+      margin-left: 0.4rem;
+
+      &--list {
+        background-color: #c30000;
+      }
+
+      &--tiles {
+        background-color: #161010;
+      }
+    }
+
+    &__btn:hover,
+    &__btn:focus {
+      opacity: 0.8;
+    }
+  }
+
+  @media (min-width: 624px) {
+    &__filter {
+      &-title {
+        font-size: 0.9rem;
+        padding: 0.3rem;
+      }
+      &-item {
+        font-size: 0.7rem;
+        padding: 0.3rem;
+      }
+    }
+  }
+
+  @media (min-width: 912px) {
+    &__filter {
+      &-title {
+        font-size: 1rem;
+      }
+      &-item {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

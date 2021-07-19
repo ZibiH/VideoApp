@@ -1,7 +1,7 @@
 <div data-display="preview">
   <div class="video-container">
-    <div class="video-container__img" (click)="onToggleModal()">
-      <img class="preview-img" [src]="video.picture" />
+    <div class="video-container__preview" (click)="onToggleModal()">
+      <img class="video-container__preview__img" [src]="video.picture" />
     </div>
     <div class="video-container__info">
       <h2 class="video-container__info-title">{{ video.title }}</h2>
@@ -22,7 +22,7 @@
           video.likes | number
         }}</span>
       </div>
-      <div class="video-container__stats-item">
+      <div class="video-container__stats-item" *ngIf="video.date">
         <mat-icon class="video-container__stats-icon">calendar_today</mat-icon>
         <span class="video-container__stats-text">{{ video.date | date }}</span>
       </div>

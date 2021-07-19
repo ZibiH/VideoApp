@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Sort } from '@angular/material/sort';
+
 import { StorageService } from '@app/services/storage.service';
 
 import { Video } from '@app/models/video';
@@ -11,10 +13,40 @@ import { Video } from '@app/models/video';
 })
 export class VideoListComponent implements OnInit {
   videos: Video[] = [];
+  sortedVideos: Video[];
 
-  constructor(private videoStorage: StorageService) {}
+  constructor(private videoStorage: StorageService) {
+    this.sortedVideos = this.videos.slice();
+  }
 
   ngOnInit(): void {
     this.videos = this.videoStorage.getVideosList();
+    this.sortedVideos = this.videos.slice();
+  }
+
+  sortVideos(sort: Sort) {
+    const data = this.videos.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedVideos = data;
+      return;
+    }
+
+    function compare(a: number | string, b: number | string, isAsc: boolean) {
+      return (+a - +b < 0 ? -1 : 1) * (isAsc ? 1 : -1);
+    }
+
+    this.sortedVideos = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'views':
+          return compare(a.views!, b.views!, isAsc);
+        case 'likes':
+          return compare(a.likes, b.likes, isAsc);
+        case 'date':
+          return compare(a.date!, b.date!, isAsc);
+        default:
+          return 0;
+      }
+    });
   }
 }
