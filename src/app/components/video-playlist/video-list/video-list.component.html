@@ -12,12 +12,16 @@
       <button
         mat-button
         class="playlist__views__btn playlist__views__btn--list"
+        data-view="list"
+        (click)="onDisplayStyle($event)"
       >
         <mat-icon class="playlist__views__btn-icon">list_black</mat-icon>
       </button>
       <button
         mat-button
         class="playlist__views__btn playlist__views__btn--tiles"
+        data-view="tile"
+        (click)="onDisplayStyle($event)"
       >
         <mat-icon class="playlist__views__btn-icon">grid_view_black</mat-icon>
       </button>
