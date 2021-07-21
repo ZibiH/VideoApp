@@ -1,4 +1,4 @@
-<div data-display="preview">
+<div data-display="tile">
   <div class="video-container">
     <div class="video-container__preview" (click)="onToggleModal()">
       <img class="video-container__preview__img" [src]="video.picture" />
@@ -28,37 +28,49 @@
       </div>
     </div>
     <div class="video-container__actions">
-      <mat-icon>favorite_border</mat-icon>
-      <mat-icon>play_circle</mat-icon>
-      <mat-icon>delete_outline</mat-icon>
+      <button mat-button class="video-container__actions__btn">
+        <mat-icon class="video-container__actions__btn-icon">
+          favorite_border
+        </mat-icon>
+      </button>
+      <button mat-button mat-button class="video-container__actions__btn">
+        <mat-icon class="video-container__actions__btn-icon">
+          play_circle
+        </mat-icon>
+      </button>
+      <button mat-button mat-button class="video-container__actions__btn">
+        <mat-icon class="video-container__actions__btn-icon">
+          delete_outline
+        </mat-icon>
+      </button>
     </div>
-    <div
-      class="video-container__modal"
-      id="modal"
-      *ngIf="isModalActive"
-      (click)="onBackdropClick($event)"
-    >
-      <mat-card class="video-container__modal-card">
-        <mat-card-header class="video-container__modal-card__header">
-          <mat-card-title>{{ video.title }}</mat-card-title>
-          <mat-card-subtitle>
-            {{ video.description }}
-          </mat-card-subtitle>
-        </mat-card-header>
-        <div class="video-container__modal-card-iframe">
-          <iframe
-            width="100%"
-            height="100%"
-            frameborder="0"
-            allowfullscreen
-            [src]="video.safeSrc"
-          ></iframe>
-        </div>
-        <mat-card-actions class="video-container__modal-close">
-          <button mat-fab color="warn" (click)="onToggleModal()">close</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+  </div>
+  <div
+    class="video-container__modal"
+    id="modal"
+    *ngIf="isModalActive"
+    (click)="onBackdropClick($event)"
+  >
+    <mat-card class="video-container__modal-card">
+      <mat-card-header class="video-container__modal-card__header">
+        <mat-card-title>{{ video.title }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ video.description }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <div class="video-container__modal-card-iframe">
+        <iframe
+          width="100%"
+          height="100%"
+          frameborder="0"
+          allowfullscreen
+          [src]="video.safeSrc"
+        ></iframe>
+      </div>
+      <mat-card-actions class="video-container__modal-close">
+        <button mat-fab color="warn" (click)="onToggleModal()">close</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <mat-divider></mat-divider>
 </div>
