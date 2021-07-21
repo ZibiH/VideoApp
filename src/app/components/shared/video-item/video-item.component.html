@@ -28,7 +28,11 @@
       </div>
     </div>
     <div class="video-container__actions">
-      <button mat-button class="video-container__actions__btn">
+      <button
+        mat-button
+        class="video-container__actions__btn"
+        (click)="onAddToFavourite(video)"
+      >
         <mat-icon class="video-container__actions__btn-icon">
           favorite_border
         </mat-icon>

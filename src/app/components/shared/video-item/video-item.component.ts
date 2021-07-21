@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+
+import { StorageService } from '@app/services/storage.service';
+
 import { Video } from '@app/models/video';
 
 @Component({
@@ -11,6 +14,8 @@ export class VideoItemComponent {
   @Input() displayStyle!: string;
   isModalActive = false;
 
+  constructor(private storageService: StorageService) {}
+
   onToggleModal() {
     this.isModalActive = !this.isModalActive;
   }
@@ -20,5 +25,11 @@ export class VideoItemComponent {
     if (clickedObj.id === 'modal') {
       this.isModalActive = false;
     }
+  }
+
+  onAddToFavourite(video: Video) {
+    this.video = video;
+    this.video.favourites = !this.video.favourites;
+    console.log(video);
   }
 }

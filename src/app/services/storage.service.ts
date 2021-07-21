@@ -76,6 +76,13 @@ export class StorageService implements OnInit {
     return this.videosStorageList;
   }
 
+  addToFavourites(videoId: string) {
+    this.getSavedVideos();
+    this.videosStorageList.filter((video) => {
+      video.id === videoId;
+    });
+  }
+
   // ************************
   // ************************
   // ****   Server DB    ****
