@@ -8,6 +8,7 @@ import { Video } from '@app/models/video';
 })
 export class VideoItemComponent {
   @Input() video!: Video;
+  @Input() displayStyle!: string;
   isModalActive = false;
 
   onToggleModal() {

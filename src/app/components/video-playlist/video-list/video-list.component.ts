@@ -18,12 +18,12 @@ export class VideoListComponent implements OnInit {
 
   constructor(private videoStorage: StorageService) {
     this.sortedVideos = this.videos.slice();
+    this.setDisplayStyle();
   }
 
   ngOnInit(): void {
     this.videos = this.videoStorage.getVideosList();
     this.sortedVideos = this.videos.slice();
-    this.setDisplayStyle();
   }
 
   sortVideos(sort: Sort) {
@@ -63,8 +63,8 @@ export class VideoListComponent implements OnInit {
 
   setDisplayStyle() {
     const videoViewContainer = document.querySelectorAll('[data-display]');
-    videoViewContainer.forEach((videoItem) =>
-      videoItem.setAttribute('data-display', this.displayStyle)
-    );
+    videoViewContainer.forEach((videoItem) => {
+      videoItem.setAttribute('data-display', this.displayStyle);
+    });
   }
 }

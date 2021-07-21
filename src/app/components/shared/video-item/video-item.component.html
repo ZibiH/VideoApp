@@ -1,4 +1,4 @@
-<div data-display="tile">
+<div [attr.data-display]="displayStyle">
   <div class="video-container">
     <div class="video-container__preview" (click)="onToggleModal()">
       <img class="video-container__preview__img" [src]="video.picture" />
