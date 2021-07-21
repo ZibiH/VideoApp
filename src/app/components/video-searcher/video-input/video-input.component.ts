@@ -14,6 +14,7 @@ import { InputData } from '@models/input-data';
 })
 export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
+  displayStyle = 'preview';
   showingPreview = false;
   videos: Video[] = [];
 
@@ -23,6 +24,7 @@ export class VideoInputComponent {
   ) {}
 
   onSubmit(form: NgForm): void {
+    this.showingPreview = false;
     // Fetch online API
     const videoData: InputData = {
       videoUrl: form.value.videoUrl,

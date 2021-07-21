@@ -42,7 +42,11 @@
       </button>
     </form>
   </mat-toolbar>
-  <app-video-item *ngFor="let vid of videos" [video]="vid"></app-video-item>
+  <app-video-item
+    *ngFor="let vid of videos"
+    [video]="vid"
+    [displayStyle]="displayStyle"
+  ></app-video-item>
   <div class="search__action-options" *ngIf="showingPreview">
     <button
       mat-raised-button

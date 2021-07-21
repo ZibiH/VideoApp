@@ -9,10 +9,20 @@
       </div>
     </div>
     <div class="playlist__views">
-      <button mat-fab class="playlist__views__btn playlist__views__btn--list">
+      <button
+        mat-button
+        class="playlist__views__btn playlist__views__btn--list"
+        data-view="list"
+        (click)="onDisplayStyle($event)"
+      >
         <mat-icon class="playlist__views__btn-icon">list_black</mat-icon>
       </button>
-      <button mat-fab class="playlist__views__btn playlist__views__btn--tiles">
+      <button
+        mat-button
+        class="playlist__views__btn playlist__views__btn--tiles"
+        data-view="tile"
+        (click)="onDisplayStyle($event)"
+      >
         <mat-icon class="playlist__views__btn-icon">grid_view_black</mat-icon>
       </button>
     </div>
@@ -22,5 +32,6 @@
   <app-video-item
     *ngFor="let vid of sortedVideos"
     [video]="vid"
+    [displayStyle]="displayStyle"
   ></app-video-item>
 </section>

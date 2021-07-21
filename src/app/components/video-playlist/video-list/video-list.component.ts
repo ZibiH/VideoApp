@@ -14,9 +14,11 @@ import { Video } from '@app/models/video';
 export class VideoListComponent implements OnInit {
   videos: Video[] = [];
   sortedVideos: Video[];
+  displayStyle = 'list';
 
   constructor(private videoStorage: StorageService) {
     this.sortedVideos = this.videos.slice();
+    this.setDisplayStyle();
   }
 
   ngOnInit(): void {
@@ -47,6 +49,22 @@ export class VideoListComponent implements OnInit {
         default:
           return 0;
       }
+    });
+  }
+
+  onDisplayStyle(event: Event) {
+    const target = event.target as HTMLElement;
+    const buttonData = target.closest('button');
+    if (buttonData) {
+      this.displayStyle = <string>buttonData.getAttribute('data-view');
+    }
+    this.setDisplayStyle();
+  }
+
+  setDisplayStyle() {
+    const videoViewContainer = document.querySelectorAll('[data-display]');
+    videoViewContainer.forEach((videoItem) => {
+      videoItem.setAttribute('data-display', this.displayStyle);
     });
   }
 }
