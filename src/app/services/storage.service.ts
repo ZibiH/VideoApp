@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { Video } from '@app/models/video';
 import { VideoSearchService } from './video-search.service';
@@ -17,6 +17,8 @@ export class StorageService implements OnInit {
       'Content-type': 'application/json',
     }),
   };
+
+  videosStorageListChange = new Subject<Video[]>();
 
   private videosStorageList: Video[] = [];
 
@@ -46,6 +48,7 @@ export class StorageService implements OnInit {
       this.videosStorageList.push(video);
     }
     this.setLocalStorageVideoItem();
+    this.videosStorageListChange.next(this.videosStorageList);
   }
 
   checkLocalStorageExistance(): boolean {
@@ -87,6 +90,7 @@ export class StorageService implements OnInit {
     videosList[videoIndex].favourites = !videosList[videoIndex].favourites;
     this.videosStorageList = videosList;
     this.setLocalStorageVideoItem();
+    this.videosStorageListChange.next(this.videosStorageList);
   }
 
   deleteVideoFromStorage(video: Video) {
@@ -96,6 +100,7 @@ export class StorageService implements OnInit {
       (videoEl) => videoEl.id !== video.id
     );
     this.setLocalStorageVideoItem();
+    this.videosStorageListChange.next(this.videosStorageList);
   }
 
   // ************************

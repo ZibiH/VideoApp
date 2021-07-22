@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { Sort } from '@angular/material/sort';
 
@@ -11,7 +13,8 @@ import { Video } from '@app/models/video';
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.scss'],
 })
-export class VideoListComponent implements OnInit {
+export class VideoListComponent implements OnInit, OnDestroy {
+  private videosSubscription!: Subscription;
   videos: Video[] = [];
   sortedVideos: Video[];
   displayStyle = 'list';
@@ -22,7 +25,12 @@ export class VideoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.videos = this.videoStorage.getVideosList();
-    this.sortedVideos = this.videos.slice();
+    this.videosSubscription =
+      this.videoStorage.videosStorageListChange.subscribe((videosList) => {
+        this.videos = videosList;
+        this.sortedVideos = this.videos;
+      });
+    this.sortedVideos = this.videos;
   }
 
   sortVideos(sort: Sort) {
@@ -65,5 +73,8 @@ export class VideoListComponent implements OnInit {
     videoViewContainer.forEach((videoItem) => {
       videoItem.setAttribute('data-display', this.displayStyle);
     });
+  }
+  ngOnDestroy() {
+    this.videosSubscription.unsubscribe();
   }
 }
