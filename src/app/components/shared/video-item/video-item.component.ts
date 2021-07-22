@@ -28,8 +28,6 @@ export class VideoItemComponent {
   }
 
   onAddToFavourite(video: Video) {
-    this.video = video;
-    this.video.favourites = !this.video.favourites;
-    console.log(video);
+    this.storageService.addToFavourites(video);
   }
 }
