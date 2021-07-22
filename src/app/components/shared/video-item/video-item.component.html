@@ -33,8 +33,17 @@
         class="video-container__actions__btn"
         (click)="onAddToFavourite(video)"
       >
-        <mat-icon class="video-container__actions__btn-icon">
+        <mat-icon
+          class="video-container__actions__btn-icon"
+          *ngIf="!video.favourites"
+        >
           favorite_border
+        </mat-icon>
+        <mat-icon
+          class="video-container__actions__btn-icon"
+          *ngIf="video.favourites"
+        >
+          favorite
         </mat-icon>
       </button>
       <button mat-button mat-button class="video-container__actions__btn">
