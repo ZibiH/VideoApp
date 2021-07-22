@@ -46,13 +46,21 @@
           favorite
         </mat-icon>
       </button>
-      <button mat-button mat-button class="video-container__actions__btn">
+      <button
+        mat-button
+        mat-button
+        class="video-container__actions__btn"
+        (click)="onToggleModal()"
+      >
         <mat-icon class="video-container__actions__btn-icon">
           play_circle
         </mat-icon>
       </button>
       <button mat-button mat-button class="video-container__actions__btn">
-        <mat-icon class="video-container__actions__btn-icon">
+        <mat-icon
+          class="video-container__actions__btn-icon"
+          (click)="onDeleteVideo(video)"
+        >
           delete_outline
         </mat-icon>
       </button>

@@ -30,4 +30,8 @@ export class VideoItemComponent {
   onAddToFavourite(video: Video) {
     this.storageService.addToFavourites(video);
   }
+
+  onDeleteVideo(video: Video) {
+    this.storageService.deleteVideoFromStorage(video);
+  }
 }

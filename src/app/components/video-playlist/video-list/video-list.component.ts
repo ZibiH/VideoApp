@@ -18,7 +18,6 @@ export class VideoListComponent implements OnInit {
 
   constructor(private videoStorage: StorageService) {
     this.sortedVideos = this.videos.slice();
-    this.setDisplayStyle();
   }
 
   ngOnInit(): void {

@@ -56,6 +56,7 @@ export class StorageService implements OnInit {
   }
 
   checkLocalStorageVideoItem(video: Video): boolean {
+    this.getSavedVideos();
     if (!this.videosStorageList) {
       return false;
     }
@@ -76,6 +77,8 @@ export class StorageService implements OnInit {
     return this.videosStorageList;
   }
 
+  // ACTION BUTTONS HANDLING
+
   addToFavourites(video: Video) {
     const videosList = this.videosStorageList.slice();
     const videoIndex = videosList.findIndex(
@@ -83,6 +86,15 @@ export class StorageService implements OnInit {
     );
     videosList[videoIndex].favourites = !videosList[videoIndex].favourites;
     this.videosStorageList = videosList;
+    this.setLocalStorageVideoItem();
+  }
+
+  deleteVideoFromStorage(video: Video) {
+    const videosList = this.videosStorageList.slice();
+
+    this.videosStorageList = videosList.filter(
+      (videoEl) => videoEl.id !== video.id
+    );
     this.setLocalStorageVideoItem();
   }
 
