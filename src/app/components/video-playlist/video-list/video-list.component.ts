@@ -15,9 +15,11 @@ import { Video } from '@app/models/video';
 })
 export class VideoListComponent implements OnInit, OnDestroy {
   private videosSubscription!: Subscription;
+
   videos: Video[] = [];
   sortedVideos: Video[];
   displayStyle = 'list';
+  showingFavorites = false;
 
   constructor(private videoStorage: StorageService) {
     this.sortedVideos = this.videos.slice();
@@ -57,6 +59,11 @@ export class VideoListComponent implements OnInit, OnDestroy {
           return 0;
       }
     });
+  }
+
+  onShowFavorites() {
+    this.showingFavorites = !this.showingFavorites;
+    this.videoStorage.showFavorites();
   }
 
   onDisplayStyle(event: Event) {

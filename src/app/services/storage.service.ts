@@ -19,6 +19,7 @@ export class StorageService implements OnInit {
   };
 
   videosStorageListChange = new Subject<Video[]>();
+  private showingFavorites = false;
 
   private videosStorageList: Video[] = [];
 
@@ -100,6 +101,18 @@ export class StorageService implements OnInit {
       (videoEl) => videoEl.id !== video.id
     );
     this.setLocalStorageVideoItem();
+    this.videosStorageListChange.next(this.videosStorageList);
+  }
+
+  showFavorites() {
+    this.showingFavorites = !this.showingFavorites;
+    if (this.showingFavorites) {
+      const favoritesList = this.videosStorageList.filter(
+        (video) => video.favourites
+      );
+      this.videosStorageListChange.next(favoritesList);
+      return;
+    }
     this.videosStorageListChange.next(this.videosStorageList);
   }
 
