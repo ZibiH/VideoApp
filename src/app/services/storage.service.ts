@@ -21,7 +21,7 @@ export class StorageService implements OnInit {
   private videosStorageList: Video[] = [];
 
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private vsService: VideoSearchService
   ) {}
 
@@ -56,6 +56,7 @@ export class StorageService implements OnInit {
   }
 
   checkLocalStorageVideoItem(video: Video): boolean {
+    this.getSavedVideos();
     if (!this.videosStorageList) {
       return false;
     }
@@ -76,22 +77,43 @@ export class StorageService implements OnInit {
     return this.videosStorageList;
   }
 
+  // ACTION BUTTONS HANDLING
+
+  addToFavourites(video: Video) {
+    const videosList = this.videosStorageList.slice();
+    const videoIndex = videosList.findIndex(
+      (videoEl) => videoEl.id === video.id
+    );
+    videosList[videoIndex].favourites = !videosList[videoIndex].favourites;
+    this.videosStorageList = videosList;
+    this.setLocalStorageVideoItem();
+  }
+
+  deleteVideoFromStorage(video: Video) {
+    const videosList = this.videosStorageList.slice();
+
+    this.videosStorageList = videosList.filter(
+      (videoEl) => videoEl.id !== video.id
+    );
+    this.setLocalStorageVideoItem();
+  }
+
   // ************************
   // ************************
   // ****   Server DB    ****
   // ************************
   // ************************
 
-  checkServerDbExistance() {}
+  // checkServerDbExistance() {}
 
-  checkServerDbVideoItem() {}
+  // checkServerDbVideoItem() {}
 
-  addToServerDb(video: Video): void {
-    const videoItem = JSON.stringify(video);
-    this.http.post(this.videoLocalApiUrl, videoItem, this.videoLocalApiHeaders);
-  }
+  // addToServerDb(video: Video): void {
+  //   const videoItem = JSON.stringify(video);
+  //   this.http.post(this.videoLocalApiUrl, videoItem, this.videoLocalApiHeaders);
+  // }
 
-  getLocalDbVideos(): Observable<Video[]> {
-    return this.http.get<Video[]>(this.videoLocalApiUrl);
-  }
+  // getLocalDbVideos(): Observable<Video[]> {
+  //   return this.http.get<Video[]>(this.videoLocalApiUrl);
+  // }
 }
