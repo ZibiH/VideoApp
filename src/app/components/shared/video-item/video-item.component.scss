@@ -4,7 +4,7 @@
     display: flex;
     width: 100%;
     max-width: 80rem;
-    margin: 0.3rem auto;
+    margin: 0.2rem auto;
     height: 6rem;
     gap: 0.4rem;
     justify-content: space-between;
@@ -12,20 +12,20 @@
     overflow: hidden;
 
     &__preview {
-      height: 90%;
-      max-width: 7rem;
+      height: 100%;
+      max-width: 8rem;
       margin-left: 0.8rem;
       cursor: pointer;
       transition: transform 0.3s ease-out;
 
       &__img {
         width: auto;
-        max-width: 6rem;
+        max-width: 8rem;
         height: 100%;
       }
 
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
       }
     }
 
@@ -35,15 +35,18 @@
       flex-direction: column;
       text-align: center;
       justify-content: center;
+      align-items: center;
 
       &-title {
         font-size: 0.8rem;
         line-height: 1.45;
-        margin-bottom: 0.2rem;
+        margin-bottom: 1rem;
       }
 
       &-items {
         display: flex;
+        width: 100%;
+        max-width: 20rem;
         justify-content: space-evenly;
       }
       &-item {
@@ -60,7 +63,7 @@
       }
 
       &-text {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
       }
     }
 
@@ -146,11 +149,11 @@
       height: 7rem;
 
       &__preview {
-        max-width: 8rem;
+        max-width: 9rem;
         margin-left: 1.6rem;
 
         &__img {
-          max-width: 8rem;
+          max-width: 9rem;
         }
       }
 
@@ -158,37 +161,6 @@
         &-title {
           font-size: 0.9rem;
           line-height: 1.45;
-          margin-bottom: 0.3rem;
-        }
-
-        &-description {
-          font-size: 0.7rem;
-          line-height: 1.2;
-          margin: 0;
-        }
-      }
-
-      &__stats {
-        min-width: 6.5rem;
-
-        &-icon {
-          width: 18px;
-          height: 18px;
-          font-size: 18px;
-          margin-right: 0.5rem;
-        }
-
-        &-text {
-          font-size: 0.8rem;
-        }
-      }
-      &__actions {
-        &__btn {
-          &-icon {
-            width: 1.2rem;
-            height: 1.2rem;
-            font-size: 1.2rem;
-          }
         }
       }
     }
@@ -199,25 +171,18 @@
       height: 10rem;
 
       &__preview {
-        max-width: 12rem;
+        max-width: 13rem;
         margin-left: 1.6rem;
 
         &__img {
-          max-width: 12rem;
+          max-width: 13rem;
         }
       }
 
       &__info {
         &-title {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           line-height: 1.45;
-          margin-bottom: 0.3rem;
-        }
-
-        &-description {
-          font-size: 0.9rem;
-          line-height: 1.1;
-          margin: 0;
         }
       }
 
@@ -236,7 +201,7 @@
         }
       }
       &__actions {
-        height: 100%;
+        flex-direction: row;
         justify-content: space-around;
         &__btn {
           &-icon {
@@ -282,7 +247,7 @@
       }
 
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.01);
       }
     }
 
@@ -296,26 +261,19 @@
       &-title {
         font-size: 0.8rem;
         line-height: 1.45;
-        margin-bottom: 0.2rem;
+        margin-bottom: 1rem;
       }
 
-      &-description {
-        color: rgba(0, 0, 0, 0.65);
-        font-size: 0.6rem;
-        line-height: 1.1;
-        margin: 0;
+      &-items {
+        display: flex;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: space-around;
       }
-    }
-
-    &__stats {
-      display: flex;
-      width: 100%;
-      color: rgba(0, 0, 0, 0.65);
-      align-items: flex-start;
-      justify-content: space-around;
 
       &-item {
         display: flex;
+        color: rgba(0, 0, 0, 0.65);
         align-items: center;
       }
 
@@ -415,7 +373,6 @@
         &-title {
           font-size: 0.9rem;
           line-height: 1.45;
-          margin-bottom: 0.3rem;
         }
 
         &-description {
@@ -444,7 +401,7 @@
     .video-container {
       &__info {
         &-title {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           line-height: 1.45;
         }
 
