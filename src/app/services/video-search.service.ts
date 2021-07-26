@@ -48,7 +48,7 @@ export class VideoSearchService {
         const safeSrc = this.sanitizeVideoSrc(
           this.youtubeEnv.iframeUrl + videoData.items[0].id
         );
-        console.log(videoData.items[0]);
+
         const video = {
           service: this.youtubeEnv.service,
           id: videoData.items[0].id,
