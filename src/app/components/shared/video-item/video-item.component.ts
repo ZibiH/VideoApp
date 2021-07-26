@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 
 import { StorageService } from '@app/services/storage.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteAlertComponent } from '../delete-alert/delete-alert.component';
+
 import { Video } from '@app/models/video';
 
 @Component({
@@ -14,7 +17,10 @@ export class VideoItemComponent {
   @Input() displayStyle!: string;
   isModalActive = false;
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private dialog: MatDialog
+  ) {}
 
   onToggleModal() {
     this.isModalActive = !this.isModalActive;
@@ -31,7 +37,14 @@ export class VideoItemComponent {
     this.storageService.addToFavourites(video);
   }
 
-  onDeleteVideo(video: Video) {
+  onOpenDialog(video: Video) {
+    const dialogRef = this.dialog.open(DeleteAlertComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      result === 'delete' ? this.deleteVideo(video) : this.dialog.closeAll();
+    });
+  }
+
+  deleteVideo(video: Video) {
     this.storageService.deleteVideoFromStorage(video);
   }
 }

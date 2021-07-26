@@ -61,11 +61,9 @@
         mat-icon-button
         class="video-container__actions__btn"
         matTooltip="Delete video from your list"
+        (click)="onOpenDialog(video)"
       >
-        <mat-icon
-          class="video-container__actions__btn-icon"
-          (click)="onDeleteVideo(video)"
-        >
+        <mat-icon class="video-container__actions__btn-icon">
           delete_outline
         </mat-icon>
       </button>
