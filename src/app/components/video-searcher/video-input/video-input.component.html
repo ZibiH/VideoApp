@@ -43,8 +43,8 @@
     </form>
   </mat-toolbar>
   <app-video-item
-    *ngFor="let vid of videos"
-    [video]="vid"
+    *ngIf="showingPreview"
+    [video]="videos[0]"
     [displayStyle]="displayStyle"
   ></app-video-item>
   <div class="search__action-options" *ngIf="showingPreview">
