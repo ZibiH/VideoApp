@@ -5,7 +5,7 @@
 
   &__options {
     display: flex;
-    width: 90%;
+    width: 100%;
     max-width: 75rem;
     align-items: center;
     justify-content: space-between;
@@ -17,10 +17,11 @@
     flex-direction: column;
     min-width: 50%;
     margin-top: 0.8rem;
+    margin-left: 1.2rem;
 
     &-title {
       width: 100%;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 600;
     }
 
@@ -30,19 +31,16 @@
     }
 
     &-item {
-      font-size: 0.6rem;
+      font-size: 0.5rem;
       text-transform: uppercase;
-      margin-right: 0.6rem;
+      margin-right: 0.35rem;
     }
   }
 
   &__views {
     display: flex;
     flex-wrap: nowrap;
-
-    &__btn {
-      margin-left: 0.4rem;
-    }
+    margin-right: 1rem;
   }
 
   @media (min-width: 624px) {
