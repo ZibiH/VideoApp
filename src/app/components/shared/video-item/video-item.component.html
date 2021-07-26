@@ -5,31 +5,31 @@
     </div>
     <div class="video-container__info">
       <h2 class="video-container__info-title">{{ video.title }}</h2>
-      <p class="video-container__info-description">
-        {{ video.description }}
-      </p>
+      <div class="video-container__info-items">
+        <div class="video-container__info-item" *ngIf="video.views">
+          <mat-icon class="video-container__info-icon">visibility</mat-icon>
+          <span class="video-container__info-text">{{
+            video.views | number
+          }}</span>
+        </div>
+        <div class="video-container__info-item">
+          <mat-icon class="video-container__info-icon">thumb_up</mat-icon>
+          <span class="video-container__info-text">{{
+            video.likes | number
+          }}</span>
+        </div>
+        <div class="video-container__info-item" *ngIf="video.date">
+          <mat-icon class="video-container__info-icon">calendar_today</mat-icon>
+          <span class="video-container__info-text">{{
+            video.date | date
+          }}</span>
+        </div>
+      </div>
     </div>
-    <div class="video-container__stats">
-      <div class="video-container__stats-item" *ngIf="video.views">
-        <mat-icon class="video-container__stats-icon">visibility</mat-icon>
-        <span class="video-container__stats-text">{{
-          video.views | number
-        }}</span>
-      </div>
-      <div class="video-container__stats-item">
-        <mat-icon class="video-container__stats-icon">thumb_up</mat-icon>
-        <span class="video-container__stats-text">{{
-          video.likes | number
-        }}</span>
-      </div>
-      <div class="video-container__stats-item" *ngIf="video.date">
-        <mat-icon class="video-container__stats-icon">calendar_today</mat-icon>
-        <span class="video-container__stats-text">{{ video.date | date }}</span>
-      </div>
-    </div>
+
     <div class="video-container__actions">
       <button
-        mat-button
+        mat-icon-button
         class="video-container__actions__btn"
         (click)="onAddToFavourite(video)"
       >
@@ -47,8 +47,7 @@
         </mat-icon>
       </button>
       <button
-        mat-button
-        mat-button
+        mat-icon-button
         class="video-container__actions__btn"
         (click)="onToggleModal()"
       >
@@ -56,7 +55,7 @@
           play_circle
         </mat-icon>
       </button>
-      <button mat-button mat-button class="video-container__actions__btn">
+      <button mat-icon-button class="video-container__actions__btn">
         <mat-icon
           class="video-container__actions__btn-icon"
           (click)="onDeleteVideo(video)"
@@ -75,9 +74,6 @@
     <mat-card class="video-container__modal-card">
       <mat-card-header class="video-container__modal-card__header">
         <mat-card-title>{{ video.title }}</mat-card-title>
-        <mat-card-subtitle>
-          {{ video.description }}
-        </mat-card-subtitle>
       </mat-card-header>
       <div class="video-container__modal-card-iframe">
         <iframe
