@@ -30,6 +30,7 @@
     <div class="video-container__actions">
       <button
         mat-icon-button
+        matTooltip="Add video to favorites!"
         class="video-container__actions__btn"
         (click)="onAddToFavourite(video)"
       >
@@ -48,6 +49,7 @@
       </button>
       <button
         mat-icon-button
+        matTooltip="Play video"
         class="video-container__actions__btn"
         (click)="onToggleModal()"
       >
@@ -55,7 +57,11 @@
           play_circle
         </mat-icon>
       </button>
-      <button mat-icon-button class="video-container__actions__btn">
+      <button
+        mat-icon-button
+        class="video-container__actions__btn"
+        matTooltip="Delete video from your list"
+      >
         <mat-icon
           class="video-container__actions__btn-icon"
           (click)="onDeleteVideo(video)"

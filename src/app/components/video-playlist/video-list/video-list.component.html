@@ -9,6 +9,7 @@
         <button
           class="playlist__filter-favorites"
           mat-icon-button
+          matTooltip="Show favorites"
           (click)="onShowFavorites()"
         >
           <mat-icon *ngIf="showingFavorites">favorite</mat-icon>
@@ -19,6 +20,7 @@
     <div class="playlist__views">
       <button
         mat-icon-button
+        matTooltip="list view"
         class="playlist__views__btn playlist__views__btn--list"
         data-view="list"
         (click)="onDisplayStyle($event)"
@@ -27,6 +29,7 @@
       </button>
       <button
         mat-icon-button
+        matTooltip="tile view"
         class="playlist__views__btn playlist__views__btn--tiles"
         data-view="tile"
         (click)="onDisplayStyle($event)"
