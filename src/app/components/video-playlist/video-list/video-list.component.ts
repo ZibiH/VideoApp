@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Sort } from '@angular/material/sort';
+import { PageEvent } from '@angular/material/paginator';
 
 import { StorageService } from '@app/services/storage.service';
 
@@ -21,8 +22,16 @@ export class VideoListComponent implements OnInit, OnDestroy {
   displayStyle = 'list';
   showingFavorites = false;
 
+  PAGE_SIZE = 5;
+  START_INDEX = 0;
+  paginatedVideos: Video[];
+
   constructor(private videoStorage: StorageService) {
     this.sortedVideos = this.videos.slice();
+    this.paginatedVideos = this.sortedVideos.slice(
+      this.START_INDEX,
+      this.PAGE_SIZE
+    );
   }
 
   ngOnInit(): void {
@@ -31,8 +40,16 @@ export class VideoListComponent implements OnInit, OnDestroy {
       this.videoStorage.videosStorageListChange.subscribe((videosList) => {
         this.videos = videosList;
         this.sortedVideos = this.videos;
+        this.paginatedVideos = this.sortedVideos.slice(
+          this.START_INDEX,
+          this.PAGE_SIZE
+        );
       });
     this.sortedVideos = this.videos;
+    this.paginatedVideos = this.sortedVideos.slice(
+      this.START_INDEX,
+      this.PAGE_SIZE
+    );
   }
 
   sortVideos(sort: Sort) {
@@ -59,6 +76,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
           return 0;
       }
     });
+    this.paginatedVideos = this.sortedVideos;
   }
 
   onShowFavorites() {
@@ -81,6 +99,16 @@ export class VideoListComponent implements OnInit, OnDestroy {
       videoItem.setAttribute('data-display', this.displayStyle);
     });
   }
+
+  onPageChange(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.sortedVideos.length) {
+      endIndex = this.sortedVideos.length;
+    }
+    this.paginatedVideos = this.sortedVideos.slice(startIndex, endIndex);
+  }
+
   ngOnDestroy() {
     this.videosSubscription.unsubscribe();
   }

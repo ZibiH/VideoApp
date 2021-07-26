@@ -38,8 +38,15 @@
   <mat-divider></mat-divider>
 
   <app-video-item
-    *ngFor="let vid of sortedVideos"
+    *ngFor="let vid of paginatedVideos"
     [video]="vid"
     [displayStyle]="displayStyle"
   ></app-video-item>
+  <mat-paginator
+    [length]="this.sortedVideos.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
 </section>
