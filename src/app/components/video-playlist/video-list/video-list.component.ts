@@ -22,7 +22,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
   displayStyle = 'list';
   showingFavorites = false;
 
-  PAGE_SIZE = 5;
+  PAGE_SIZE = 6;
   START_INDEX = 0;
   paginatedVideos: Video[];
 
