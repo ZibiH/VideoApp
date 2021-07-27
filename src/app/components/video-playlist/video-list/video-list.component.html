@@ -7,7 +7,7 @@
         <p class="playlist__filter-item" mat-sort-header="likes">Likes</p>
         <p class="playlist__filter-item" mat-sort-header="date">Upload</p>
         <button
-          class="playlist__filter-favorites"
+          class="playlist__filter__button"
           mat-icon-button
           matTooltip="Show favorites"
           (click)="onShowFavorites()"
@@ -16,6 +16,7 @@
           <mat-icon>favorite_border</mat-icon>
         </button>
         <button
+          class="playlist__filter__button"
           mat-icon-button
           matTooltip="Show all videos"
           (click)="onShowFavorites()"
@@ -24,6 +25,7 @@
           <mat-icon>favorite</mat-icon>
         </button>
         <button
+          class="playlist__filter__button"
           mat-icon-button
           matTooltip="Delete all videos"
           (click)="onDeleteAllVideos()"
