@@ -171,11 +171,11 @@
 [data-display="preview"] {
   .video-container {
     display: flex;
-    height: 26rem;
+    height: 27rem;
     width: 100%;
+    max-width: 30rem;
     background-color: rgba(245, 245, 245, 0.8);
     flex-direction: column;
-    max-width: 30rem;
     justify-content: stretch;
     align-items: center;
     margin: 0.3rem auto;
@@ -206,21 +206,17 @@
       height: 100%;
       flex-direction: column;
       text-align: center;
-      justify-content: space-between;
 
       &-title {
         font-size: 0.8rem;
         line-height: 1.45;
         margin-top: 1rem;
-        margin-bottom: auto;
       }
 
       &-items {
         display: flex;
-        width: 100%;
         align-items: center;
         justify-content: space-around;
-        margin-bottom: 1rem;
       }
 
       &-item {
