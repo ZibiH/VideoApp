@@ -18,20 +18,18 @@ export class VideoListComponent implements OnInit, OnDestroy {
   private videosSubscription!: Subscription;
 
   videos: Video[] = [];
-  sortedVideos: Video[];
+
   displayStyle = 'list';
   showingFavorites = false;
 
-  PAGE_SIZE = 6;
-  START_INDEX = 0;
+  private ACTUAL_SORTING: Sort = { active: '', direction: '' };
+
+  private PAGE_SIZE = 6;
+  private START_INDEX = 0;
   paginatedVideos: Video[];
 
   constructor(private videoStorage: StorageService) {
-    this.sortedVideos = this.videos.slice();
-    this.paginatedVideos = this.sortedVideos.slice(
-      this.START_INDEX,
-      this.PAGE_SIZE
-    );
+    this.paginatedVideos = this.videos.slice(this.START_INDEX, this.PAGE_SIZE);
   }
 
   ngOnInit(): void {
@@ -39,23 +37,19 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.videosSubscription =
       this.videoStorage.videosStorageListChange.subscribe((videosList) => {
         this.videos = videosList;
-        this.sortedVideos = this.videos;
-        this.paginatedVideos = this.sortedVideos.slice(
+        this.paginatedVideos = this.videos.slice(
           this.START_INDEX,
           this.PAGE_SIZE
         );
       });
-    this.sortedVideos = this.videos;
-    this.paginatedVideos = this.sortedVideos.slice(
-      this.START_INDEX,
-      this.PAGE_SIZE
-    );
+    this.paginatedVideos = this.videos.slice(this.START_INDEX, this.PAGE_SIZE);
   }
 
   sortVideos(sort: Sort) {
+    this.ACTUAL_SORTING = sort;
     const data = this.videos.slice();
     if (!sort.active || sort.direction === '') {
-      this.sortedVideos = data;
+      this.paginatedVideos = data.slice(this.START_INDEX, this.PAGE_SIZE);
       return;
     }
 
@@ -63,7 +57,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
       return (+a - +b < 0 ? -1 : 1) * (isAsc ? 1 : -1);
     }
 
-    this.sortedVideos = data.sort((a, b) => {
+    const sortedVideos = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'views':
@@ -76,12 +70,14 @@ export class VideoListComponent implements OnInit, OnDestroy {
           return 0;
       }
     });
-    this.paginatedVideos = this.sortedVideos;
+    this.videos = sortedVideos;
+    this.paginatedVideos = this.videos.slice(this.START_INDEX, this.PAGE_SIZE);
   }
 
   onShowFavorites() {
     this.showingFavorites = !this.showingFavorites;
     this.videoStorage.showFavorites();
+    this.sortVideos(this.ACTUAL_SORTING);
   }
 
   onDisplayStyle(event: Event) {
@@ -106,12 +102,12 @@ export class VideoListComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(event: PageEvent) {
-    const startIndex = event.pageIndex * event.pageSize;
-    let endIndex = startIndex + event.pageSize;
-    if (endIndex > this.sortedVideos.length) {
-      endIndex = this.sortedVideos.length;
+    this.START_INDEX = event.pageIndex * event.pageSize;
+    this.PAGE_SIZE = this.START_INDEX + event.pageSize;
+    if (this.PAGE_SIZE > this.videos.length) {
+      this.PAGE_SIZE = this.videos.length;
     }
-    this.paginatedVideos = this.sortedVideos.slice(startIndex, endIndex);
+    this.paginatedVideos = this.videos.slice(this.START_INDEX, this.PAGE_SIZE);
   }
 
   ngOnDestroy() {

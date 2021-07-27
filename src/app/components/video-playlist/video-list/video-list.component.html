@@ -48,7 +48,7 @@
   </div>
   <mat-paginator
     class="playlist__paginator"
-    [length]="this.sortedVideos.length"
+    [length]="this.videos.length"
     [pageSize]="6"
     [pageSizeOptions]="[6, 12, 24]"
     (page)="onPageChange($event)"
