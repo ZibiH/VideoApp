@@ -1,0 +1,17 @@
+.dialog {
+  &__title {
+    text-align: center;
+  }
+
+  &__content {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  &__button {
+    &--delete {
+      background-color: rgba(195, 0, 0, 1);
+      color: #fff;
+    }
+  }
+}

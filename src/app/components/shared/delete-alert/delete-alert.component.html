@@ -1,11 +1,20 @@
-<h2 mat-dialog-title>Delete the video</h2>
+<h2 mat-dialog-title class="dialog__title">Delete the video</h2>
 <mat-divider></mat-divider>
-<mat-dialog-content>Are you sure?</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" mat-dialog-close>
+<mat-dialog-content class="dialog__content">Are you sure?</mat-dialog-content>
+<mat-dialog-actions class="dialog__actions">
+  <button
+    mat-raised-button
+    color="primary"
+    class="dialog__button--cancel"
+    mat-dialog-close
+  >
     No, thanks...
   </button>
-  <button mat-raised-button color="warn" mat-dialog-close="delete">
+  <button
+    mat-raised-button
+    class="dialog__button--delete"
+    mat-dialog-close="delete"
+  >
     Yup, delete it!
   </button>
 </mat-dialog-actions>

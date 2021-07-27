@@ -19,9 +19,11 @@ export class StorageService implements OnInit {
   };
 
   videosStorageListChange = new Subject<Video[]>();
+
   private showingFavorites = false;
 
   private videosStorageList: Video[] = [];
+  private favoriteVideosList: Video[] = [];
 
   constructor(
     // private http: HttpClient,
@@ -30,6 +32,7 @@ export class StorageService implements OnInit {
 
   ngOnInit() {
     this.getSavedVideos();
+    this.getFavoritesVideos();
   }
 
   getSavedVideos() {
@@ -81,6 +84,12 @@ export class StorageService implements OnInit {
     return this.videosStorageList;
   }
 
+  getFavoritesVideos() {
+    this.favoriteVideosList = this.videosStorageList.filter(
+      (video) => video.favourites
+    );
+  }
+
   // ACTION BUTTONS HANDLING
 
   addToFavourites(video: Video) {
@@ -91,7 +100,10 @@ export class StorageService implements OnInit {
     videosList[videoIndex].favourites = !videosList[videoIndex].favourites;
     this.videosStorageList = videosList;
     this.setLocalStorageVideoItem();
-    this.videosStorageListChange.next(this.videosStorageList);
+    this.getFavoritesVideos();
+    this.showingFavorites
+      ? this.videosStorageListChange.next(this.favoriteVideosList)
+      : this.videosStorageListChange.next(this.videosStorageList);
   }
 
   deleteVideoFromStorage(video: Video) {
@@ -107,10 +119,8 @@ export class StorageService implements OnInit {
   showFavorites() {
     this.showingFavorites = !this.showingFavorites;
     if (this.showingFavorites) {
-      const favoritesList = this.videosStorageList.filter(
-        (video) => video.favourites
-      );
-      this.videosStorageListChange.next(favoritesList);
+      this.getFavoritesVideos();
+      this.videosStorageListChange.next(this.favoriteVideosList);
       return;
     }
     this.videosStorageListChange.next(this.videosStorageList);
