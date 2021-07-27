@@ -3,6 +3,17 @@
   flex-direction: column;
   background-color: #e5e5e5;
 
+  &__items {
+    display: flex;
+    flex-direction: column;
+    &.tile {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+  }
+
   &__options {
     display: flex;
     width: 100%;
@@ -44,6 +55,12 @@
   }
 
   @media (min-width: 624px) {
+    &__items {
+      &.tile {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
     &__filter {
       &-title {
         font-size: 0.9rem;
@@ -56,7 +73,13 @@
     }
   }
 
-  @media (min-width: 912px) {
+  @media (min-width: 1200px) {
+    &__items {
+      &.tile {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
     &__filter {
       &-title {
         font-size: 1rem;

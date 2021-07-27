@@ -215,11 +215,12 @@
   .video-container {
     display: flex;
     flex-direction: column;
+    height: 26rem;
     width: 100%;
     max-width: 30rem;
     margin: 0.3rem auto;
     gap: 0.4rem;
-    justify-content: space-between;
+    justify-content: stretch;
     align-items: center;
     overflow: hidden;
 
@@ -227,6 +228,7 @@
       width: 90%;
       cursor: pointer;
       transition: transform 0.3s ease-out;
+      height: 17rem;
 
       &__img {
         width: 100%;
@@ -281,6 +283,7 @@
       width: 90%;
       justify-content: flex-end;
       align-items: center;
+      margin-top: auto;
 
       &__btn {
         color: rgba(0, 0, 0, 0.65);
@@ -384,7 +387,7 @@
     }
   }
 
-  @media (min-width: 912px) {
+  @media (min-width: 1200px) {
     .video-container {
       &__info {
         &-title {

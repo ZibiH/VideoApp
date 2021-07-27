@@ -39,12 +39,13 @@
     </div>
   </header>
   <mat-divider></mat-divider>
-
-  <app-video-item
-    *ngFor="let vid of paginatedVideos"
-    [video]="vid"
-    [displayStyle]="displayStyle"
-  ></app-video-item>
+  <div class="playlist__items">
+    <app-video-item
+      *ngFor="let vid of paginatedVideos"
+      [video]="vid"
+      [displayStyle]="displayStyle"
+    ></app-video-item>
+  </div>
   <mat-paginator
     [length]="this.sortedVideos.length"
     [pageSize]="5"
