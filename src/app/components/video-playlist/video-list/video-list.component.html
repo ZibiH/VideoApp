@@ -11,9 +11,18 @@
           mat-icon-button
           matTooltip="Show favorites"
           (click)="onShowFavorites()"
+          *ngIf="!showingFavorites"
         >
-          <mat-icon *ngIf="showingFavorites">favorite</mat-icon>
-          <mat-icon *ngIf="!showingFavorites">favorite_border</mat-icon>
+          <mat-icon>favorite_border</mat-icon>
+        </button>
+        <button
+          class="playlist__filter-favorites"
+          mat-icon-button
+          matTooltip="Show all videos"
+          (click)="onShowFavorites()"
+          *ngIf="showingFavorites"
+        >
+          <mat-icon>favorite</mat-icon>
         </button>
       </div>
     </div>

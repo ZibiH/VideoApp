@@ -33,17 +33,26 @@
         matTooltip="Add video to favorites!"
         class="video-container__actions__btn"
         (click)="onAddToFavourite(video)"
+        *ngIf="!video.favourites"
       >
-        <mat-icon
-          class="video-container__actions__btn-icon"
-          *ngIf="!video.favourites"
-        >
+        <mat-icon class="video-container__actions__btn-icon">
           favorite_border
         </mat-icon>
         <mat-icon
           class="video-container__actions__btn-icon"
           *ngIf="video.favourites"
         >
+          favorite
+        </mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Remove video from favorites!"
+        class="video-container__actions__btn"
+        (click)="onAddToFavourite(video)"
+        *ngIf="video.favourites"
+      >
+        <mat-icon class="video-container__actions__btn-icon">
           favorite
         </mat-icon>
       </button>
