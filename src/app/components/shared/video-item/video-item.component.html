@@ -76,9 +76,6 @@
     (click)="onBackdropClick($event)"
   >
     <mat-card class="video-container__modal-card">
-      <mat-card-header class="video-container__modal-card__header">
-        <mat-card-title>{{ video.title }}</mat-card-title>
-      </mat-card-header>
       <div class="video-container__modal-card-iframe">
         <iframe
           width="100%"
@@ -88,6 +85,9 @@
           [src]="video.safeSrc"
         ></iframe>
       </div>
+      <mat-card-header class="video-container__modal-card__header">
+        <mat-card-title>{{ video.title }}</mat-card-title>
+      </mat-card-header>
       <mat-card-actions class="video-container__modal-close">
         <button mat-fab color="warn" (click)="onToggleModal()">close</button>
       </mat-card-actions>
