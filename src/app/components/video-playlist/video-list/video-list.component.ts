@@ -94,10 +94,15 @@ export class VideoListComponent implements OnInit, OnDestroy {
   }
 
   setDisplayStyle() {
-    const videoViewContainer = document.querySelectorAll('[data-display]');
-    videoViewContainer.forEach((videoItem) => {
+    const videoItemContainer = document.querySelectorAll('[data-display]');
+    const videoListContainer = document.querySelector('.playlist__items');
+
+    videoItemContainer.forEach((videoItem) => {
       videoItem.setAttribute('data-display', this.displayStyle);
     });
+    if (videoListContainer) {
+      videoListContainer.className = `playlist__items ${this.displayStyle}`;
+    }
   }
 
   onPageChange(event: PageEvent) {
