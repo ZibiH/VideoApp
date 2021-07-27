@@ -6,6 +6,9 @@
   &__items {
     display: flex;
     flex-direction: column;
+    max-width: 75rem;
+    margin: 0 auto;
+
     &.tile {
       display: grid;
       grid-template-columns: 1fr;
@@ -54,7 +57,11 @@
     margin-right: 1rem;
   }
 
-  @media (min-width: 624px) {
+  &__paginator {
+    background-color: rgba(215, 215, 215, 1);
+  }
+
+  @media (min-width: 912px) {
     &__items {
       &.tile {
         display: grid;

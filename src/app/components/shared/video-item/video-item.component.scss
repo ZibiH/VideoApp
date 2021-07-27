@@ -226,13 +226,14 @@
 
     &__preview {
       width: 90%;
+      background-color: rgba(0, 0, 0, 1);
       cursor: pointer;
       transition: transform 0.3s ease-out;
-      height: 17rem;
 
       &__img {
         width: 100%;
-        height: 100%;
+        height: 17rem;
+        object-fit: contain;
       }
 
       &:hover {
@@ -243,20 +244,21 @@
     &__info {
       display: flex;
       width: 90%;
+      height: 100%;
       flex-direction: column;
       text-align: center;
-      justify-content: center;
+      justify-content: space-between;
 
       &-title {
         font-size: 0.8rem;
         line-height: 1.45;
-        margin-bottom: 1rem;
+        margin-bottom: auto;
       }
 
       &-items {
         display: flex;
         width: 100%;
-        align-items: flex-start;
+        align-items: flex;
         justify-content: space-around;
       }
 
@@ -283,7 +285,7 @@
       width: 90%;
       justify-content: flex-end;
       align-items: center;
-      margin-top: auto;
+      margin-bottom: 0;
 
       &__btn {
         color: rgba(0, 0, 0, 0.65);
@@ -362,26 +364,6 @@
       &__info {
         &-title {
           font-size: 0.9rem;
-          line-height: 1.45;
-        }
-
-        &-description {
-          font-size: 0.7rem;
-          line-height: 1.2;
-          margin: 0;
-        }
-      }
-
-      &__stats {
-        &-icon {
-          width: 1.2rem;
-          height: 1.2rem;
-          font-size: 1.2rem;
-          margin-right: 0.5rem;
-        }
-
-        &-text {
-          font-size: 0.8rem;
         }
       }
     }
@@ -392,23 +374,6 @@
       &__info {
         &-title {
           font-size: 1.1rem;
-          line-height: 1.45;
-        }
-
-        &-description {
-          font-size: 0.9rem;
-        }
-      }
-
-      &__stats {
-        &-icon {
-          width: 1.5rem;
-          height: 1.5rem;
-          font-size: 1.5rem;
-        }
-
-        &-text {
-          font-size: 1rem;
         }
       }
     }
