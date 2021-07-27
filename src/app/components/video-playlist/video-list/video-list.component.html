@@ -16,13 +16,19 @@
           <mat-icon>favorite_border</mat-icon>
         </button>
         <button
-          class="playlist__filter-favorites"
           mat-icon-button
           matTooltip="Show all videos"
           (click)="onShowFavorites()"
           *ngIf="showingFavorites"
         >
           <mat-icon>favorite</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Delete all videos"
+          (click)="onDeleteAllVideos()"
+        >
+          <mat-icon>delete</mat-icon>
         </button>
       </div>
     </div>

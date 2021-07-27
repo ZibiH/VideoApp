@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteAlertComponent } from '../../shared/delete-alert/delete-alert.component';
 
 import { StorageService } from '@app/services/storage.service';
 
@@ -28,7 +30,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
   private START_INDEX = 0;
   paginatedVideos: Video[];
 
-  constructor(private videoStorage: StorageService) {
+  constructor(private videoStorage: StorageService, private dialog: MatDialog) {
     this.paginatedVideos = this.videos.slice(this.START_INDEX, this.PAGE_SIZE);
   }
 
@@ -78,6 +80,15 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.showingFavorites = !this.showingFavorites;
     this.videoStorage.showFavorites();
     this.sortVideos(this.ACTUAL_SORTING);
+  }
+
+  onDeleteAllVideos() {
+    const dialogRef = this.dialog.open(DeleteAlertComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      result === 'delete'
+        ? this.videoStorage.deleteAllVideosFromStorage()
+        : this.dialog.closeAll();
+    });
   }
 
   onDisplayStyle(event: Event) {

@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { StorageService } from '@app/services/storage.service';
 
-import { MatDialog } from '@angular/material/dialog';
 import { DeleteAlertComponent } from '../delete-alert/delete-alert.component';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Video } from '@app/models/video';
 
@@ -40,11 +40,9 @@ export class VideoItemComponent {
   onOpenDialog(video: Video) {
     const dialogRef = this.dialog.open(DeleteAlertComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      result === 'delete' ? this.deleteVideo(video) : this.dialog.closeAll();
+      result === 'delete'
+        ? this.storageService.deleteVideoFromStorage(video)
+        : this.dialog.closeAll();
     });
-  }
-
-  deleteVideo(video: Video) {
-    this.storageService.deleteVideoFromStorage(video);
   }
 }
