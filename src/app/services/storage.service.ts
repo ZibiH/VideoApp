@@ -126,6 +126,12 @@ export class StorageService implements OnInit {
     this.videosStorageListChange.next(this.videosStorageList);
   }
 
+  deleteAllVideosFromStorage() {
+    localStorage.clear();
+    this.videosStorageList = [];
+    this.videosStorageListChange.next(this.videosStorageList);
+  }
+
   // ************************
   // ************************
   // ****   Server DB    ****
