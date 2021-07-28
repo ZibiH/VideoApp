@@ -100,6 +100,11 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.setDisplayStyle();
   }
 
+  onUploadDefaultVideoList() {
+    // this.videoStorage.addToServerDb();
+    this.videoStorage.getLocalDbVideos();
+  }
+
   setDisplayStyle() {
     const videoItemContainer = document.querySelectorAll('[data-display]');
     const videoListContainer = document.querySelector('.playlist__items');

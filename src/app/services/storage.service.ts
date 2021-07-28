@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Video } from '@app/models/video';
 import { VideoSearchService } from './video-search.service';
@@ -26,7 +27,7 @@ export class StorageService implements OnInit {
   private favoriteVideosList: Video[] = [];
 
   constructor(
-    // private http: HttpClient,
+    private http: HttpClient,
     private vsService: VideoSearchService
   ) {}
 
@@ -138,16 +139,27 @@ export class StorageService implements OnInit {
   // ************************
   // ************************
 
-  // checkServerDbExistance() {}
+  addToServerDb(): void {
+    this.http
+      .post<Video[]>(
+        this.videoLocalApiUrl,
+        this.videosStorageList,
+        this.videoLocalApiHeaders
+      )
+      .subscribe((response) => console.log(response));
+  }
 
-  // checkServerDbVideoItem() {}
-
-  // addToServerDb(video: Video): void {
-  //   const videoItem = JSON.stringify(video);
-  //   this.http.post(this.videoLocalApiUrl, videoItem, this.videoLocalApiHeaders);
-  // }
-
-  // getLocalDbVideos(): Observable<Video[]> {
-  //   return this.http.get<Video[]>(this.videoLocalApiUrl);
-  // }
+  getLocalDbVideos(): void {
+    this.http
+      .get<Array<Video[]>>(this.videoLocalApiUrl)
+      .pipe(map((videoArray: Video[][]) => videoArray[0]))
+      .subscribe((videoList: Video[]) => {
+        videoList.forEach((video: Video) => {
+          this.addVideoToList(video);
+          console.log(video);
+        });
+        this.getSavedVideos();
+        this.getFavoritesVideos();
+      });
+  }
 }

@@ -24,14 +24,6 @@
         >
           <mat-icon>favorite</mat-icon>
         </button>
-        <button
-          class="playlist__filter__button"
-          mat-icon-button
-          matTooltip="Delete all videos"
-          (click)="onDeleteAllVideos()"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
       </div>
     </div>
     <div class="playlist__views">
@@ -71,4 +63,32 @@
     (page)="onPageChange($event)"
   >
   </mat-paginator>
+  <div class="playlist__actions">
+    <button
+      *ngIf="paginatedVideos.length > 0"
+      mat-icon-button
+      matTooltip="Upload default video-list"
+      class="playlist__actions__button"
+      disabled
+    >
+      <mat-icon>movie</mat-icon>
+    </button>
+    <button
+      *ngIf="paginatedVideos.length === 0"
+      mat-icon-button
+      matTooltip="Upload default video-list"
+      class="playlist__actions__button"
+      (click)="onUploadDefaultVideoList()"
+    >
+      <mat-icon>movie</mat-icon>
+    </button>
+    <button
+      class="playlist__actions__button"
+      mat-icon-button
+      matTooltip="Delete all videos"
+      (click)="onDeleteAllVideos()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </section>
