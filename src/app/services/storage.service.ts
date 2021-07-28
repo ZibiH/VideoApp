@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Video } from '@app/models/video';
 import { VideoSearchService } from './video-search.service';
@@ -138,13 +139,7 @@ export class StorageService implements OnInit {
   // ************************
   // ************************
 
-  // checkServerDbExistance() {}
-
-  // checkServerDbVideoItem() {}
-
   addToServerDb(): void {
-    // const videoList = JSON.stringify(this.videosStorageList);
-    // console.log(videoList);
     this.http
       .post<Video[]>(
         this.videoLocalApiUrl,
@@ -156,10 +151,15 @@ export class StorageService implements OnInit {
 
   getLocalDbVideos(): void {
     this.http
-      .get<Video[]>(this.videoLocalApiUrl)
+      .get<Array<Video[]>>(this.videoLocalApiUrl)
+      .pipe(map((videoArray: Video[][]) => videoArray[0]))
       .subscribe((videoList: Video[]) => {
-        // this.videosStorageList = videoList;
-        console.log(videoList[0]);
+        videoList.forEach((video: Video) => {
+          this.addVideoToList(video);
+          console.log(video);
+        });
+        this.getSavedVideos();
+        this.getFavoritesVideos();
       });
   }
 }
