@@ -26,7 +26,7 @@ export class StorageService implements OnInit {
   private favoriteVideosList: Video[] = [];
 
   constructor(
-    // private http: HttpClient,
+    private http: HttpClient,
     private vsService: VideoSearchService
   ) {}
 
@@ -142,12 +142,24 @@ export class StorageService implements OnInit {
 
   // checkServerDbVideoItem() {}
 
-  // addToServerDb(video: Video): void {
-  //   const videoItem = JSON.stringify(video);
-  //   this.http.post(this.videoLocalApiUrl, videoItem, this.videoLocalApiHeaders);
-  // }
+  addToServerDb(): void {
+    // const videoList = JSON.stringify(this.videosStorageList);
+    // console.log(videoList);
+    this.http
+      .post<Video[]>(
+        this.videoLocalApiUrl,
+        this.videosStorageList,
+        this.videoLocalApiHeaders
+      )
+      .subscribe((response) => console.log(response));
+  }
 
-  // getLocalDbVideos(): Observable<Video[]> {
-  //   return this.http.get<Video[]>(this.videoLocalApiUrl);
-  // }
+  getLocalDbVideos(): void {
+    this.http
+      .get<Video[]>(this.videoLocalApiUrl)
+      .subscribe((videoList: Video[]) => {
+        // this.videosStorageList = videoList;
+        console.log(videoList[0]);
+      });
+  }
 }
