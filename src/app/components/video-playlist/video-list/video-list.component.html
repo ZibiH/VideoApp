@@ -65,6 +65,16 @@
   </mat-paginator>
   <div class="playlist__actions">
     <button
+      *ngIf="paginatedVideos.length > 0"
+      mat-icon-button
+      matTooltip="Upload default video-list"
+      class="playlist__actions__button"
+      disabled
+    >
+      <mat-icon>movie</mat-icon>
+    </button>
+    <button
+      *ngIf="paginatedVideos.length === 0"
       mat-icon-button
       matTooltip="Upload default video-list"
       class="playlist__actions__button"
