@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteAlertComponent } from '../../shared/delete-alert/delete-alert.component';
+import { DeleteAlertComponent } from '@shared/delete-alert/delete-alert.component';
 
 import { StorageService } from '@app/services/storage.service';
 
