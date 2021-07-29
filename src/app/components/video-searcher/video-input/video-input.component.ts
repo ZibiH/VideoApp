@@ -22,7 +22,7 @@ export class VideoInputComponent {
 
   constructor(
     private vsService: VideoSearchService,
-    private storage: StorageService
+    private storageService: StorageService
   ) {}
 
   onSubmit(form: NgForm): void {
@@ -40,9 +40,9 @@ export class VideoInputComponent {
         this.showingPreview = true;
       },
       (error) => {
-        this.errorMessage = `It doesn't looks like ${videoData.videoService} url/id, try again!`;
+        console.log(error);
+        this.errorMessage = error.message;
         this.errorState = true;
-        console.error(error.message);
       }
     );
     form.resetForm();
@@ -50,7 +50,7 @@ export class VideoInputComponent {
 
   onAddVideo(): void {
     this.videos[0].date = Date.now();
-    this.storage.addVideoToList(this.videos[0]);
+    this.storageService.addVideoToList(this.videos[0]);
     this.videos = [];
     this.showingPreview = false;
     this.errorState = false;
