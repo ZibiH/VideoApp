@@ -40,9 +40,25 @@ export class VideoInputComponent {
         this.showingPreview = true;
       },
       (error) => {
-        console.log(error);
+        if (error.status === undefined) {
+          this.errorMessage = 'Wrong service selected, try again!';
+          this.errorState = true;
+          return;
+        }
+        if (error.status.toString() === '0') {
+          this.errorMessage = 'Wrong url, id or selected service, try again!';
+          this.errorState = true;
+          return;
+        }
+        if (error.status === 404) {
+          this.errorMessage =
+            "Video doesn't exist on selected service, try again!";
+          this.errorState = true;
+          return;
+        }
         this.errorMessage = error.message;
         this.errorState = true;
+        return;
       }
     );
     form.resetForm();
