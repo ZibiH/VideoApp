@@ -14,9 +14,11 @@ import { InputData } from '@models/input-data';
 })
 export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
+  videos: Video[] = [];
   displayStyle = 'preview';
   showingPreview = false;
-  videos: Video[] = [];
+  errorMessage: string = '';
+  errorState = false;
 
   constructor(
     private vsService: VideoSearchService,
@@ -24,6 +26,7 @@ export class VideoInputComponent {
   ) {}
 
   onSubmit(form: NgForm): void {
+    this.errorState = false;
     this.showingPreview = false;
     // Fetch online API
     const videoData: InputData = {
@@ -31,12 +34,18 @@ export class VideoInputComponent {
       videoService: form.value.videoService,
     };
 
-    this.vsService
-      .fetchVideoApiData(videoData)
-      .subscribe((video) => (this.videos = [video]));
-
+    this.vsService.fetchVideoApiData(videoData).subscribe(
+      (video) => {
+        this.videos = [video];
+        this.showingPreview = true;
+      },
+      (error) => {
+        this.errorMessage = `It doesn't looks like ${videoData.videoService} url/id, try again!`;
+        this.errorState = true;
+        console.error(error.message);
+      }
+    );
     form.resetForm();
-    this.showingPreview = true;
   }
 
   onAddVideo(): void {
@@ -44,10 +53,12 @@ export class VideoInputComponent {
     this.storage.addVideoToList(this.videos[0]);
     this.videos = [];
     this.showingPreview = false;
+    this.errorState = false;
   }
 
   onCancelVideo(): void {
     this.videos = [];
     this.showingPreview = false;
+    this.errorState = false;
   }
 }

@@ -42,26 +42,31 @@
       </button>
     </form>
   </mat-toolbar>
-  <app-video-item
-    *ngFor="let vid of videos"
-    [video]="vid"
-    [displayStyle]="displayStyle"
-  ></app-video-item>
-  <div class="search__action-options" *ngIf="showingPreview">
-    <button
-      mat-raised-button
-      class="search__action-options--add"
-      color="primary"
-      (click)="onAddVideo()"
-    >
-      Add video to your list!
-    </button>
-    <button
-      mat-raised-button
-      class="search__action-options--cancel"
-      (click)="onCancelVideo()"
-    >
-      Look for another...
-    </button>
-  </div>
+  <ng-container *ngIf="!errorState">
+    <app-video-item
+      *ngFor="let vid of videos"
+      [video]="vid"
+      [displayStyle]="displayStyle"
+    ></app-video-item>
+    <div class="search__action-options" *ngIf="showingPreview">
+      <button
+        mat-raised-button
+        class="search__action-options--add"
+        color="primary"
+        (click)="onAddVideo()"
+      >
+        Add video to your list!
+      </button>
+      <button
+        mat-raised-button
+        class="search__action-options--cancel"
+        (click)="onCancelVideo()"
+      >
+        Look for another...
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="errorState">
+    <mat-error class="search__api-error">{{ errorMessage }}</mat-error>
+  </ng-container>
 </section>

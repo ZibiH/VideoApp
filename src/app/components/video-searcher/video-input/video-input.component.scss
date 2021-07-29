@@ -71,4 +71,10 @@
       opacity: 0.7;
     }
   }
+
+  &__api-error {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+  }
 }
