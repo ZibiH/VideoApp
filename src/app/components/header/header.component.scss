@@ -1,17 +1,19 @@
+@use '/src/variables' as var;
+
 .header {
-  background-color: #161010;
+  background-color: rgba(22, 16, 16, 1);
 
   &__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 75rem;
-    margin: 0 auto;
+    max-width: var.$max-width;
+    margin: var.$margin-center;
   }
 
   &__title {
-    color: #fff;
+    color: var.$text-color-header;
     font-size: 1.1rem;
     font-weight: bold;
     font-style: italic;
@@ -25,7 +27,7 @@
 
     &-link {
       position: relative;
-      color: #fff;
+      color: var.$text-color-header;
       font-size: 0.9rem;
       font-weight: bold;
       padding: 0.2rem;
@@ -34,7 +36,7 @@
       cursor: pointer;
 
       &--accent {
-        color: #c30000;
+        color: var.$text-color-accent;
       }
     }
 
@@ -50,11 +52,24 @@
     &-link:hover::after,
     &-link:active::after,
     &-link.isSelected::after {
-      border-bottom: 2px solid #c30000;
+      border-bottom: 2px solid var.$text-color-accent;
     }
   }
 
   @media (min-width: 624px) {
+    &__title {
+      font-size: 1.2rem;
+    }
+
+    &__action {
+      &-link {
+        font-size: 1rem;
+        padding: 0.4rem;
+      }
+    }
+  }
+
+  @media (min-width: 912px) {
     &__title {
       font-size: 1.3rem;
     }
@@ -62,7 +77,6 @@
     &__action {
       &-link {
         font-size: 1.1rem;
-        padding: 0.4rem;
       }
     }
   }

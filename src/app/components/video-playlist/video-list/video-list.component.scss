@@ -1,14 +1,16 @@
+@use '/src/variables' as var;
+
 .playlist {
   display: flex;
   flex-direction: column;
-  background-color: #e5e5e5;
+  background-color: var.$background-color-main;
 
   &__items {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 75rem;
-    margin: 0 auto;
+    max-width: var.$max-width;
+    margin: var.$margin-center;
 
     &.tile {
       display: grid;
@@ -22,10 +24,10 @@
   &__options {
     display: flex;
     width: 100%;
-    max-width: 75rem;
+    max-width: var.$max-width;
     align-items: center;
     justify-content: space-between;
-    margin: 0 auto;
+    margin: var.$margin-center;
   }
 
   &__filter {
@@ -36,7 +38,7 @@
     margin-left: 1.2rem;
 
     &__button {
-      color: rgba(0, 0, 0, 0.65);
+      color: var.$text-color-secondary;
     }
 
     &-title {
@@ -65,20 +67,20 @@
 
   &__paginator {
     width: 100%;
-    max-width: 75rem;
-    background-color: rgba(215, 215, 215, 1);
-    margin: 0 auto;
+    max-width: var.$max-width;
+    background-color: var.$background-color-paginator;
+    margin: var.$margin-center;
   }
 
   &__actions {
     display: flex;
     width: 100%;
-    max-width: 75rem;
+    max-width: var.$max-width;
     justify-content: flex-end;
-    margin: 0 auto;
+    margin: var.$margin-center;
 
     &__button {
-      color: rgba(0, 0, 0, 0.65);
+      color: var.$text-color-secondary;
       margin-right: 0.8rem;
     }
   }
