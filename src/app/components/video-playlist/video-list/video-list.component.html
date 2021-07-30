@@ -55,14 +55,6 @@
       [displayStyle]="displayStyle"
     ></app-video-item>
   </div>
-  <mat-paginator
-    class="playlist__paginator"
-    [length]="this.videos.length"
-    [pageSize]="6"
-    [pageSizeOptions]="[6, 12, 24]"
-    (page)="onPageChange($event)"
-  >
-  </mat-paginator>
   <div class="playlist__actions">
     <button
       *ngIf="paginatedVideos.length > 0"
@@ -91,4 +83,12 @@
       <mat-icon>delete</mat-icon>
     </button>
   </div>
+  <mat-paginator
+    class="playlist__paginator"
+    [length]="this.videos.length"
+    [pageSize]="6"
+    [pageSizeOptions]="[6, 12, 24]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
 </section>

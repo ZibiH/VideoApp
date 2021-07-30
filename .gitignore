@@ -45,8 +45,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# local server
-db.json
-
 # env
 environment.ts
