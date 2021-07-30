@@ -1,8 +1,10 @@
+@use '/src/variables' as var;
+
 [data-display="list"] {
   .video-container {
     display: flex;
     width: 100%;
-    max-width: 75rem;
+    max-width: var.$max-width;
     margin: 0.2rem auto;
     height: 5rem;
     gap: 0.4rem;
@@ -21,6 +23,7 @@
         width: auto;
         max-width: 5rem;
         height: 100%;
+        object-fit: contain;
       }
 
       &:hover {
@@ -49,7 +52,7 @@
       }
       &-item {
         display: flex;
-        color: rgba(0, 0, 0, 0.65);
+        color: var.$text-color-secondary;
         align-items: center;
       }
 
@@ -74,7 +77,7 @@
       min-width: 6rem;
 
       &__btn {
-        color: rgba(0, 0, 0, 0.65);
+        color: var.$text-color-secondary;
 
         &-icon {
           cursor: pointer;
@@ -171,10 +174,10 @@
 [data-display="preview"] {
   .video-container {
     display: flex;
-    height: 27rem;
+    height: 28rem;
     width: 100%;
     max-width: 30rem;
-    background-color: rgba(245, 245, 245, 0.8);
+    background-color: var.$background-color-tile;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
@@ -185,7 +188,7 @@
 
     &__preview {
       width: 100%;
-      background-color: rgba(0, 0, 0, 1);
+      background-color: var.$background-color-preview;
       cursor: pointer;
       transition: transform 0.3s ease-out;
 
@@ -221,7 +224,7 @@
 
       &-item {
         display: flex;
-        color: rgba(0, 0, 0, 0.65);
+        color: var.$text-color-secondary;
         align-items: center;
       }
 
@@ -245,15 +248,9 @@
       margin-bottom: 0;
 
       &__btn {
-        color: rgba(0, 0, 0, 0.65);
-
-        &-icon {
-          width: 1.2rem;
-          height: 1.2rem;
-          font-size: 1.2rem;
-          padding: 0.4rem 0.6rem;
-          cursor: pointer;
-        }
+        color: var.$text-color-secondary;
+        margin-left: 1rem;
+        cursor: pointer;
       }
 
       &__btn:hover,
@@ -302,15 +299,15 @@
 
       &-card {
         display: flex;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: var.$background-color-tile;
         width: 90%;
-        max-width: 75rem;
+        max-width: var.$max-width;
         height: 90%;
         min-height: 30rem;
         flex-direction: column;
         justify-content: space-between;
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+        box-shadow: 0 2px 4px var.$text-color-secondary;
         backdrop-filter: blur(5px);
 
         &__header {
@@ -321,9 +318,9 @@
         &-iframe {
           width: 100%;
           height: 80%;
-          background-color: rgba(0, 0, 0, 0.95);
+          background-color: var.$background-color-preview;
           border-radius: 4px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+          box-shadow: 0 2px 4px var.$text-color-secondary;
           overflow: hidden;
         }
       }
@@ -332,10 +329,10 @@
         position: absolute;
         content: "";
         width: 100%;
-        height: 100%;
+        min-height: 150vh;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.35);
+        background-color: var.$background-color-backdrop;
         z-index: -1;
       }
 
