@@ -11,6 +11,7 @@
           #videoUrl="ngModel"
           ngModel
           required
+          aria-required="true"
         />
         <mat-error
           class="search__form-error"
@@ -20,7 +21,13 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="search__select">
-        <mat-select #service="ngModel" name="videoService" ngModel required>
+        <mat-select
+          #service="ngModel"
+          name="videoService"
+          ngModel
+          required
+          aria-required="true"
+        >
           <mat-option>---</mat-option>
           <mat-option value="youtube">Youtube</mat-option>
           <mat-option value="vimeo">Vimeo</mat-option>
