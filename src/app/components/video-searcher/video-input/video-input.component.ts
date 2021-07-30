@@ -14,16 +14,19 @@ import { InputData } from '@models/input-data';
 })
 export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
+  videos: Video[] = [];
   displayStyle = 'preview';
   showingPreview = false;
-  videos: Video[] = [];
+  errorMessage: string = '';
+  errorState = false;
 
   constructor(
     private vsService: VideoSearchService,
-    private storage: StorageService
+    private storageService: StorageService
   ) {}
 
   onSubmit(form: NgForm): void {
+    this.errorState = false;
     this.showingPreview = false;
     // Fetch online API
     const videoData: InputData = {
@@ -31,23 +34,47 @@ export class VideoInputComponent {
       videoService: form.value.videoService,
     };
 
-    this.vsService
-      .fetchVideoApiData(videoData)
-      .subscribe((video) => (this.videos = [video]));
-
+    this.vsService.fetchVideoApiData(videoData).subscribe(
+      (video) => {
+        this.videos = [video];
+        this.showingPreview = true;
+      },
+      (error) => {
+        if (error.status === undefined) {
+          this.errorMessage = 'Wrong service selected, try again!';
+          this.errorState = true;
+          return;
+        }
+        if (error.status.toString() === '0') {
+          this.errorMessage = 'Wrong url, id or selected service, try again!';
+          this.errorState = true;
+          return;
+        }
+        if (error.status === 404) {
+          this.errorMessage =
+            "Video doesn't exist on selected service, try again!";
+          this.errorState = true;
+          return;
+        }
+        this.errorMessage = error.message;
+        this.errorState = true;
+        return;
+      }
+    );
     form.resetForm();
-    this.showingPreview = true;
   }
 
   onAddVideo(): void {
     this.videos[0].date = Date.now();
-    this.storage.addVideoToList(this.videos[0]);
+    this.storageService.addVideoToList(this.videos[0]);
     this.videos = [];
     this.showingPreview = false;
+    this.errorState = false;
   }
 
   onCancelVideo(): void {
     this.videos = [];
     this.showingPreview = false;
+    this.errorState = false;
   }
 }

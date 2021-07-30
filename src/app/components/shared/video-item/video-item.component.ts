@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { StorageService } from '@app/services/storage.service';
 
-import { DeleteAlertComponent } from '../delete-alert/delete-alert.component';
+import { DeleteAlertComponent } from '@shared/delete-alert/delete-alert.component';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Video } from '@app/models/video';

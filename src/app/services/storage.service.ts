@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Video } from '@app/models/video';
-import { VideoSearchService } from './video-search.service';
+import { VideoSearchService } from '@services/video-search.service';
 
 @Injectable({
   providedIn: 'root',
