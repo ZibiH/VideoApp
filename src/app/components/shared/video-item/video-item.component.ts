@@ -6,6 +6,7 @@ import { DeleteAlertComponent } from '@shared/delete-alert/delete-alert.componen
 import { MatDialog } from '@angular/material/dialog';
 
 import { Video } from '@models/video';
+import { ModalComponent } from '@shared/modal/modal.component';
 
 @Component({
   selector: 'app-video-item',
@@ -15,26 +16,26 @@ import { Video } from '@models/video';
 export class VideoItemComponent {
   @Input() video!: Video;
   @Input() displayStyle!: string;
-  isModalActive = false;
 
   constructor(
     private storageService: StorageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private modal: MatDialog
   ) {}
-
-  onToggleModal() {
-    this.isModalActive = !this.isModalActive;
-  }
-
-  onBackdropClick(event: MouseEvent) {
-    const clickedObj = event.target as HTMLElement;
-    if (clickedObj.id === 'modal') {
-      this.isModalActive = false;
-    }
-  }
 
   onAddToFavourite(video: Video) {
     this.storageService.addToFavourites(video);
+  }
+
+  onOpenModal() {
+    const modalRef = this.modal.open(ModalComponent, {
+      data: {
+        ...this.video,
+      },
+    });
+    modalRef.afterClosed().subscribe(() => {
+      this.modal.closeAll();
+    });
   }
 
   onOpenDialog(video: Video) {
