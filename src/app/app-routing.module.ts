@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+import { VideoInputComponent } from './components/video-input/video-input.component';
+import { VideoListComponent } from './components/video-playlist/video-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'add-video', pathMatch: 'full' },
   {
     path: 'add-video',
-    loadChildren: () =>
-      import('@shared/shared.module').then((module) => module.SharedModule),
+    component: VideoInputComponent,
+    pathMatch: 'full',
   },
   {
     path: 'playlist',
-    loadChildren: () =>
-      import('@video-playlist/playlist.module').then(
-        (module) => module.PlaylistModule
-      ),
+    component: VideoListComponent,
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

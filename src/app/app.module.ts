@@ -8,9 +8,10 @@ import { PlaylistModule } from './components/video-playlist/playlist.module';
 
 import { AppComponent } from '@app/app.component';
 import { HeaderComponent } from '@header/header.component';
+import { VideoInputComponent } from './components/video-input/video-input.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, VideoInputComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
