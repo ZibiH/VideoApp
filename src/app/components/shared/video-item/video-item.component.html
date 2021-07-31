@@ -1,7 +1,11 @@
 <div [attr.data-display]="displayStyle">
   <div class="video-container">
     <div class="video-container__preview" (click)="onOpenModal()">
-      <img class="video-container__preview__img" [src]="video.picture" />
+      <img
+        class="video-container__preview__img"
+        [src]="video.picture"
+        [alt]="video.title"
+      />
     </div>
     <div class="video-container__info">
       <h2 class="video-container__info-title">{{ video.title }}</h2>
