@@ -31,5 +31,14 @@
   &__close {
     display: flex;
     justify-content: center;
+
+    &__btn {
+      background-color: var.$text-color-accent;
+
+      &:hover,
+      &:focus {
+        opacity: 0.8;
+      }
+    }
   }
 }
