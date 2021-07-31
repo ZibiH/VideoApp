@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 
@@ -23,7 +23,7 @@ export class VideoSearchService {
   private vimeoViewsCount = '0';
 
   private credentials = btoa(
-    `${this.env.credentials.clientId}:${this.env.credentials.clientSecret}`
+    `${this.vimeoEnv.clientId}:${this.vimeoEnv.clientSecret}`
   );
   private vimeoHeaders = {
     headers: new HttpHeaders({
