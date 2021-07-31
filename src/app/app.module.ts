@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from '@app/material.module';
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from '@app/app.component';
 import { DeleteAlertComponent } from '@shared/delete-alert/delete-alert.component';
 import { HeaderComponent } from '@header/header.component';
 import { VideoInputComponent } from '@video-input/video-input.component';
-import { VideoFilterComponent } from '@video-filter/video-filter.component';
-import { VideoListComponent } from '@video-list/video-list.component';
 import { VideoItemComponent } from '@shared/video-item/video-item.component';
+import { VideoListComponent } from '@video-playlist/video-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { VideoItemComponent } from '@shared/video-item/video-item.component';
     DeleteAlertComponent,
     HeaderComponent,
     VideoInputComponent,
-    VideoFilterComponent,
     VideoListComponent,
     VideoItemComponent,
   ],
