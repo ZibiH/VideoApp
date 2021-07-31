@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm, FormControl, Validators } from '@angular/forms';
 
-import { VideoSearchService } from '@app/services/video-search.service';
-import { StorageService } from '@app/services/storage.service';
+import { VideoSearchService } from '@services/video-search.service';
+import { StorageService } from '@services/storage.service';
 
-import { Video } from '@app/models/video';
+import { Video } from '@models/video';
 import { InputData } from '@models/input-data';
 
 @Component({

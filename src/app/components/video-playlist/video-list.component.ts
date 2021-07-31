@@ -7,9 +7,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteAlertComponent } from '@shared/delete-alert/delete-alert.component';
 
-import { StorageService } from '@app/services/storage.service';
+import { StorageService } from '@services/storage.service';
 
-import { Video } from '@app/models/video';
+import { Video } from '@models/video';
 
 @Component({
   selector: 'app-video-list',
