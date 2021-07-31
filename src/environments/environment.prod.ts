@@ -7,7 +7,7 @@ export const environment = {
       flags: 'gim',
       replaceValue: '$3',
       iframeUrl: '//www.youtube.com/embed/',
-      apiKey: 'AIzaSyD6aVC6lTRy5FdaGzWIH5Ec2Ol_7oKJLhU',
+      apiKey: '',
       apiParts: 'snippet,statistics',
       apiUrl: 'https://www.googleapis.com/youtube/v3/videos?id=',
     },

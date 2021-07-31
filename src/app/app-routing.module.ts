@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VideoInputComponent } from '@video-input/video-input.component';
-import { VideoListComponent } from '@video-playlist/video-list.component';
 
 const routes: Routes = [
-  { path: 'add-video', component: VideoInputComponent, pathMatch: 'full' },
-  { path: 'playlist', component: VideoListComponent, pathMatch: 'full' },
   { path: '', redirectTo: 'add-video', pathMatch: 'full' },
+  {
+    path: 'add-video',
+    loadChildren: () =>
+      import('@shared/shared.module').then((module) => module.SharedModule),
+  },
+  {
+    path: 'playlist',
+    loadChildren: () =>
+      import('@video-playlist/playlist.module').then(
+        (module) => module.PlaylistModule
+      ),
+  },
 ];
 
 @NgModule({
