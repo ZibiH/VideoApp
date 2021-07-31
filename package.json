@@ -1,6 +1,8 @@
 {
   "name": "video-app",
   "version": "0.0.0",
+  "description": "Video-App - for creating and storing personal video list",
+  "license": "ISC",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
