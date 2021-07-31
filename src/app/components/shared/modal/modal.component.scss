@@ -1,0 +1,26 @@
+@use '/src/variables' as var;
+
+.modal {
+  min-width: 320px;
+  width: 65vw;
+  max-width: var.$max-width;
+  width: clamp(320px, 65vw, var.$max-width);
+
+  &__iframe {
+    min-height: 60vh;
+    background-color: var.$background-color-preview;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px var.$text-color-secondary;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__close {
+    display: flex;
+    justify-content: center;
+  }
+}

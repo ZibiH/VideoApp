@@ -12,12 +12,14 @@ import { HeaderComponent } from '@header/header.component';
 import { VideoInputComponent } from '@video-input/video-input.component';
 import { VideoItemComponent } from '@shared/video-item/video-item.component';
 import { VideoListComponent } from '@video-playlist/video-list.component';
+import { ModalComponent } from '@shared/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeleteAlertComponent,
     HeaderComponent,
+    ModalComponent,
     VideoInputComponent,
     VideoListComponent,
     VideoItemComponent,
