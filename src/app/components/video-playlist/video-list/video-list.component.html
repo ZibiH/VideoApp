@@ -3,15 +3,31 @@
     <div class="playlist__filter">
       <p class="playlist__filter-title">Sort by:</p>
       <div class="playlist__filter-items">
-        <p class="playlist__filter-item" mat-sort-header="views">Views</p>
-        <p class="playlist__filter-item" mat-sort-header="likes">Likes</p>
-        <p class="playlist__filter-item" mat-sort-header="date">Upload</p>
+        <span
+          class="playlist__filter-item"
+          mat-sort-header="views"
+          aria-label="sort by views"
+          >Views</span
+        >
+        <span
+          class="playlist__filter-item"
+          mat-sort-header="likes"
+          aria-label="sort by likes"
+          >Likes</span
+        >
+        <span
+          class="playlist__filter-item"
+          mat-sort-header="date"
+          aria-label="sort by upload date"
+          >Upload</span
+        >
         <button
           class="playlist__filter__button"
           mat-icon-button
           matTooltip="Show favorites"
           (click)="onShowFavorites()"
           *ngIf="!showingFavorites"
+          aria-label="show favorites only"
         >
           <mat-icon>favorite_border</mat-icon>
         </button>
@@ -21,6 +37,7 @@
           matTooltip="Show all videos"
           (click)="onShowFavorites()"
           *ngIf="showingFavorites"
+          aria-label="show all videos"
         >
           <mat-icon>favorite</mat-icon>
         </button>
@@ -33,6 +50,7 @@
         class="playlist__views__btn playlist__views__btn--list"
         data-view="list"
         (click)="onDisplayStyle($event)"
+        aria-label="display style - list"
       >
         <mat-icon class="playlist__views__btn-icon">list_black</mat-icon>
       </button>
@@ -42,6 +60,7 @@
         class="playlist__views__btn playlist__views__btn--tiles"
         data-view="tile"
         (click)="onDisplayStyle($event)"
+        aria-label="display style - tiles"
       >
         <mat-icon class="playlist__views__btn-icon">grid_view_black</mat-icon>
       </button>
@@ -62,6 +81,7 @@
       matTooltip="Upload default video-list"
       class="playlist__actions__button"
       disabled
+      aria-hidden="true"
     >
       <mat-icon>movie</mat-icon>
     </button>
@@ -71,6 +91,7 @@
       matTooltip="Upload default video-list"
       class="playlist__actions__button"
       (click)="onUploadDefaultVideoList()"
+      aria-label="upload default video list"
     >
       <mat-icon>movie</mat-icon>
     </button>
@@ -79,6 +100,7 @@
       mat-icon-button
       matTooltip="Delete all videos"
       (click)="onDeleteAllVideos()"
+      aria-label="delete all videos"
     >
       <mat-icon>delete</mat-icon>
     </button>
