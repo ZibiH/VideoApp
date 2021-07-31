@@ -134,12 +134,11 @@ export class StorageService implements OnInit {
   }
 
   // ************************
-  // ************************
   // ****   Server DB    ****
   // ************************
-  // ************************
 
-  addToServerDb(): void {
+  // Left here for the optional future use
+  private addToServerDb(): void {
     this.http
       .post<Video[]>(
         this.videoLocalApiUrl,
@@ -155,8 +154,9 @@ export class StorageService implements OnInit {
       .pipe(map((videoArray: Video[][]) => videoArray[0]))
       .subscribe((videoList: Video[]) => {
         videoList.forEach((video: Video) => {
-          this.addVideoToList(video);
-          console.log(video);
+          const vidItem = video;
+          vidItem.safeSrc = this.vsService.sanitizeVideoSrc(vidItem.src);
+          this.addVideoToList(vidItem);
         });
         this.getSavedVideos();
         this.getFavoritesVideos();
