@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
 
 import { Video } from '@app/models/video';
 import { VideoSearchService } from '@services/video-search.service';
+
+import { videosDemo } from '@assets/videosDemo';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +27,7 @@ export class StorageService {
 
   private videosStorageList: Video[] = [];
   private favoriteVideosList: Video[] = [];
+  private videosDemo = videosDemo;
 
   constructor(
     private http: HttpClient,
@@ -144,17 +147,36 @@ export class StorageService {
   }
 
   getLocalDbVideos(): void {
-    this.http
-      .get<Array<Video[]>>(this.videoLocalApiUrl)
-      .pipe(map((videoArray: Video[][]) => videoArray[0]))
-      .subscribe((videoList: Video[]) => {
-        videoList.forEach((video: Video) => {
-          const vidItem = video;
-          vidItem.safeSrc = this.vsService.sanitizeVideoSrc(vidItem.src);
-          this.addVideoToList(vidItem);
-        });
-        this.getSavedVideos();
-        this.getFavoritesVideos();
-      });
+    // ********************************************************
+    // Uncomment this part to use local server data (port:5000)
+    // ********************************************************
+
+    // this.http
+    //   .get<Array<Video[]>>(this.videoLocalApiUrl)
+    //   .pipe(map((videoArray: Video[][]) => videoArray[0]))
+    //   .subscribe(
+    //     (videoList: Video[]) => {
+    //       videoList.forEach((video: Video) => {
+    //         const vidItem = video;
+    //         vidItem.safeSrc = this.vsService.sanitizeVideoSrc(vidItem.src);
+    //         this.addVideoToList(vidItem);
+    //       });
+    //       this.getSavedVideos();
+    //       this.getFavoritesVideos();
+    //     },
+    //     (error) => console.log(error.message)
+    //   );
+
+    // *****************************************************
+    // Comment-out this part if you want to use local server
+    // *****************************************************
+
+    this.videosDemo.forEach((video: Video) => {
+      const vidItem = video;
+      vidItem.safeSrc = this.vsService.sanitizeVideoSrc(vidItem.src);
+      this.addVideoToList(vidItem);
+    });
+    this.getSavedVideos();
+    this.getFavoritesVideos();
   }
 }
