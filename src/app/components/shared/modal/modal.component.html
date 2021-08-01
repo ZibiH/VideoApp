@@ -1,5 +1,6 @@
 <div class="modal">
-  <mat-dialog-content class="modal__content">
+  <h3 mat-dialog-title class="modal__title">{{ video.title }}</h3>
+  <div mat-dialog-content class="modal__content">
     <iframe
       class="modal__iframe"
       width="100%"
@@ -8,17 +9,16 @@
       allowfullscreen
       [src]="video.safeSrc"
     ></iframe>
-  </mat-dialog-content>
-  <h3 mat-dialog-title class="modal__title">{{ video.title }}</h3>
-  <mat-dialog-actions class="modal__close">
+  </div>
+  <div mat-dialog-actions [align]="'end'">
     <button
       class="modal__close__btn"
-      mat-raised-button
+      mat-icon-button
       color="warn"
       mat-dialog-close
       aria-label="close window"
     >
-      Close
+      <mat-icon>close</mat-icon>
     </button>
-  </mat-dialog-actions>
+  </div>
 </div>

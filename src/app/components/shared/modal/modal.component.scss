@@ -1,27 +1,24 @@
 @use '/src/variables' as var;
 
 .modal {
-  min-width: 320px;
-  width: 55vw;
-  max-width: var.$max-width;
-  width: clamp(320px, 60vw, 50rem);
-  height: 56vh;
-  overflow: hidden;
+  display: flex;
+  height: 60vh;
+  max-height: 40rem;
+  width: 60vw;
+  max-width: 50rem;
+  flex-direction: column;
+  justify-content: space-between;
 
   &__content {
-    display: flex;
-    height: 78%;
-    justify-content: center;
+    height: 100%;
     overflow: hidden;
   }
 
   &__iframe {
-    width: 100%;
-    height: 95%;
+    height: 98%;
     background-color: var.$background-color-preview;
     border-radius: 4px;
     box-shadow: 0 2px 4px var.$text-color-secondary;
-    aspect-ratio: 16 / 9;
   }
 
   &__title {
@@ -29,9 +26,6 @@
   }
 
   &__close {
-    display: flex;
-    justify-content: center;
-
     &__btn {
       background-color: var.$text-color-accent;
       color: var.$text-color-header;
@@ -42,4 +36,18 @@
       }
     }
   }
+
+  // @media (min-width: 912px) {
+  //   &__iframe {
+  //     min-height: 20rem;
+  //     min-width: 28rem;
+  //   }
+  // }
+
+  // @media (min-width: 1200px) {
+  //   &__iframe {
+  //     min-height: 30rem;
+  //     min-width: 45rem;
+  //   }
+  // }
 }
