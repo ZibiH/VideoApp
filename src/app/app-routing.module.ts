@@ -5,7 +5,6 @@ import { VideoInputComponent } from './components/video-input/video-input.compon
 import { VideoListComponent } from './components/video-playlist/video-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'add-video', pathMatch: 'full' },
   {
     path: 'add-video',
     component: VideoInputComponent,
@@ -16,6 +15,7 @@ const routes: Routes = [
     component: VideoListComponent,
     pathMatch: 'full',
   },
+  { path: '', redirectTo: 'add-video', pathMatch: 'full' },
 ];
 
 @NgModule({
