@@ -6,7 +6,7 @@ import { VideoListComponent } from './components/video-playlist/video-list.compo
 
 const routes: Routes = [
   {
-    path: 'add-video',
+    path: '',
     component: VideoInputComponent,
     pathMatch: 'full',
   },
