@@ -8,12 +8,10 @@ const routes: Routes = [
   {
     path: '',
     component: VideoInputComponent,
-    pathMatch: 'full',
   },
   {
     path: 'playlist',
     component: VideoListComponent,
-    pathMatch: 'full',
   },
   { path: '', redirectTo: 'add-video', pathMatch: 'full' },
 ];
