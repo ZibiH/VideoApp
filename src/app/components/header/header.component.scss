@@ -1,7 +1,7 @@
 @use '/src/variables' as var;
 
 .header {
-  background-color: rgba(22, 16, 16, 1);
+  background-color: var.$background-color-header;
 
   &__wrapper {
     display: flex;

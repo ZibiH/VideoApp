@@ -21,6 +21,8 @@ export class VideoSearchService {
   private youtubeEnv = this.servData[0];
   private vimeoEnv = this.servData[1];
   private vimeoViewsCount = '0';
+  private vimeoService = this.vimeoEnv.service;
+  private youtubeService = this.youtubeEnv.service;
 
   private credentials = btoa(
     `${this.vimeoEnv.clientId}:${this.vimeoEnv.clientSecret}`
@@ -36,7 +38,7 @@ export class VideoSearchService {
 
   fetchVideoApiData(videoData: InputData): Observable<Video> {
     const apiUrl = this.getProperVideoUrl(videoData);
-    if (videoData.videoService === 'vimeo') {
+    if (videoData.videoService === this.vimeoService) {
       return this.fetchVimeoVideoData(apiUrl);
     }
     return this.fetchYoutubeVideoData(apiUrl);
@@ -71,7 +73,7 @@ export class VideoSearchService {
       map((videoData: Vimeo) => {
         const vimeoId = this.extractIdFromInputData({
           videoUrl: videoData.link,
-          videoService: 'vimeo',
+          videoService: this.vimeoService,
         });
         const safeSrc = this.sanitizeVideoSrc(
           this.vimeoEnv.iframeUrl + vimeoId
@@ -98,10 +100,10 @@ export class VideoSearchService {
     const videoId: string = this.extractIdFromInputData(videoData);
     let videoProperUrl: string;
     switch (videoData.videoService) {
-      case 'youtube':
+      case this.youtubeService:
         videoProperUrl = `${this.servData[0].apiUrl}${videoId}&key=${this.servData[0].apiKey}&part=${this.servData[0].apiParts}`;
         break;
-      case 'vimeo':
+      case this.vimeoService:
         videoProperUrl = `${this.servData[1].apiUrl}${videoId}`;
         break;
       default:

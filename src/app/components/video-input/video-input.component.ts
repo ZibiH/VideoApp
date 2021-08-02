@@ -28,37 +28,20 @@ export class VideoInputComponent {
   onSubmit(form: NgForm): void {
     this.errorState = false;
     this.showingPreview = false;
-    // Fetch online API
+
     const videoData: InputData = {
       videoUrl: form.value.videoUrl,
       videoService: form.value.videoService,
     };
-
     this.vsService.fetchVideoApiData(videoData).subscribe(
       (video) => {
         this.videos = [video];
         this.showingPreview = true;
       },
       (error) => {
-        if (error.status === undefined) {
-          this.errorMessage = 'Wrong service selected, try again!';
-          this.errorState = true;
-          return;
-        }
-        if (error.status.toString() === '0') {
-          this.errorMessage = 'Wrong url, id or selected service, try again!';
-          this.errorState = true;
-          return;
-        }
-        if (error.status === 404) {
-          this.errorMessage =
-            "Video doesn't exist on selected service, try again!";
-          this.errorState = true;
-          return;
-        }
-        this.errorMessage = error.message;
         this.errorState = true;
-        return;
+        const status = error.status;
+        this.fetchApiErrorHandler(status);
       }
     );
     form.resetForm();
@@ -76,5 +59,32 @@ export class VideoInputComponent {
     this.videos = [];
     this.showingPreview = false;
     this.errorState = false;
+  }
+
+  private fetchApiErrorHandler(status: number | undefined): void {
+    const errorMessage0 = 'Wrong url, id or selected service, try again!';
+    const errorMessage400 = 'Wrong service selected, try again!';
+    const errorMessage401 =
+      "Video doesn't exists or you are not authorized to watch it";
+    const errorMessage404 =
+      "Video doesn't exist on selected service, try again!";
+    const errorMessageDefault = 'Something went wrong, try again!';
+    switch (status) {
+      case undefined || 400:
+        this.errorMessage = errorMessage400;
+        break;
+      case 0:
+        this.errorMessage = errorMessage0;
+        break;
+      case 401:
+        this.errorMessage = errorMessage401;
+        break;
+      case 404:
+        this.errorMessage = errorMessage404;
+        break;
+      default:
+        this.errorMessage = errorMessageDefault;
+        break;
+    }
   }
 }
