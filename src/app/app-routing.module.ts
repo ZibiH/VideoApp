@@ -6,20 +6,18 @@ import { VideoListComponent } from './components/video-playlist/video-list.compo
 
 const routes: Routes = [
   {
-    path: 'add-video',
+    path: '',
     component: VideoInputComponent,
-    pathMatch: 'full',
   },
   {
     path: 'playlist',
     component: VideoListComponent,
-    pathMatch: 'full',
   },
   { path: '', redirectTo: 'add-video', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -136,15 +136,15 @@ export class StorageService {
   // ************************
 
   // Left here for the optional future use
-  private addToServerDb(): void {
-    this.http
-      .post<Video[]>(
-        this.videoLocalApiUrl,
-        this.videosStorageList,
-        this.videoLocalApiHeaders
-      )
-      .subscribe((response) => console.log(response));
-  }
+  // private addToServerDb(): void {
+  //   this.http
+  //     .post<Video[]>(
+  //       this.videoLocalApiUrl,
+  //       this.videosStorageList,
+  //       this.videoLocalApiHeaders
+  //     )
+  //     .subscribe((response) => console.log(response));
+  // }
 
   getLocalDbVideos(): void {
     // ********************************************************

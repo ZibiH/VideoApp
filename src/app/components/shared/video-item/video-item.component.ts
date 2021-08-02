@@ -38,10 +38,11 @@ export class VideoItemComponent {
     });
   }
 
-  onOpenDialog(video: Video) {
+  onOpenDeleteDialog(video: Video) {
+    const deleteResult = 'delete';
     const dialogRef = this.dialog.open(DeleteAlertComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      result === 'delete'
+      result === deleteResult
         ? this.storageService.deleteVideoFromStorage(video)
         : this.dialog.closeAll();
     });

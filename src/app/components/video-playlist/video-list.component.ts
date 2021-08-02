@@ -60,13 +60,17 @@ export class VideoListComponent implements OnInit, OnDestroy {
     }
 
     const sortedVideos = data.sort((a, b) => {
+      const viewsSort = 'views';
+      const likesSort = 'likes';
+      const dateSort = 'date';
       const isAsc = sort.direction === 'asc';
+
       switch (sort.active) {
-        case 'views':
+        case viewsSort:
           return compare(a.views!, b.views!, isAsc);
-        case 'likes':
+        case likesSort:
           return compare(a.likes, b.likes, isAsc);
-        case 'date':
+        case dateSort:
           return compare(a.date!, b.date!, isAsc);
         default:
           return 0;
@@ -83,9 +87,10 @@ export class VideoListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteAllVideos() {
+    const deleteResult = 'delete';
     const dialogRef = this.dialog.open(DeleteAlertComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      result === 'delete'
+      result === deleteResult
         ? this.videoStorage.deleteAllVideosFromStorage()
         : this.dialog.closeAll();
     });
@@ -101,7 +106,6 @@ export class VideoListComponent implements OnInit, OnDestroy {
   }
 
   onUploadDefaultVideoList() {
-    // this.videoStorage.addToServerDb();
     this.videoStorage.getLocalDbVideos();
   }
 
