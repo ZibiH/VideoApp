@@ -55,10 +55,7 @@ export class StorageService {
   }
 
   checkLocalStorageExistance(): boolean {
-    const actualLocalStorageData = localStorage.getItem(
-      this.videoLocalStorageKey
-    );
-    return actualLocalStorageData ? true : false;
+    return !!localStorage.getItem(this.videoLocalStorageKey);
   }
 
   checkLocalStorageVideoItem(video: Video): boolean {
