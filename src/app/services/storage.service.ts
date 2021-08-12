@@ -39,9 +39,10 @@ export class StorageService {
       const storageVideos = localStorage.getItem(this.videoLocalStorageKey);
       this.videosStorageList =
         storageVideos !== null ? JSON.parse(storageVideos) : [];
-      this.videosStorageList.forEach((video: Video) => {
-        video.safeSrc = this.vsService.sanitizeVideoSrc(video.src);
-      });
+      this.videosStorageList = this.videosStorageList.map((video: Video) => ({
+        ...video,
+        safeSrc: this.vsService.sanitizeVideoSrc(video.src),
+      }));
     }
   }
 
