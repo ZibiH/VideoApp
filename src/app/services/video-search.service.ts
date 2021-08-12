@@ -98,20 +98,13 @@ export class VideoSearchService {
 
   private getProperVideoUrl(videoData: InputData): string {
     const videoId: string = this.extractIdFromInputData(videoData);
-    let videoProperUrl: string;
-    switch (videoData.videoService) {
-      case this.youtubeService:
-        videoProperUrl = `${this.servData[0].apiUrl}${videoId}&key=${this.servData[0].apiKey}&part=${this.servData[0].apiParts}`;
-        break;
-      case this.vimeoService:
-        videoProperUrl = `${this.servData[1].apiUrl}${videoId}`;
-        break;
-      default:
-        videoProperUrl = '';
-        break;
+    if (videoData.videoService === this.youtubeService) {
+      return `${this.servData[0].apiUrl}${videoId}&key=${this.servData[0].apiKey}&part=${this.servData[0].apiParts}`;
     }
-
-    return videoProperUrl;
+    if (videoData.videoService === this.vimeoService) {
+      return `${this.servData[1].apiUrl}${videoId}`;
+    }
+    return '';
   }
 
   private extractIdFromInputData(videoData: InputData): string {
