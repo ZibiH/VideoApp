@@ -39,9 +39,10 @@ export class StorageService {
       const storageVideos = localStorage.getItem(this.videoLocalStorageKey);
       this.videosStorageList =
         storageVideos !== null ? JSON.parse(storageVideos) : [];
-      this.videosStorageList.forEach((video: Video) => {
-        video.safeSrc = this.vsService.sanitizeVideoSrc(video.src);
-      });
+      this.videosStorageList = this.videosStorageList.map((video: Video) => ({
+        ...video,
+        safeSrc: this.vsService.sanitizeVideoSrc(video.src),
+      }));
     }
   }
 
@@ -55,10 +56,7 @@ export class StorageService {
   }
 
   checkLocalStorageExistance(): boolean {
-    const actualLocalStorageData = localStorage.getItem(
-      this.videoLocalStorageKey
-    );
-    return actualLocalStorageData ? true : false;
+    return !!localStorage.getItem(this.videoLocalStorageKey);
   }
 
   checkLocalStorageVideoItem(video: Video): boolean {
