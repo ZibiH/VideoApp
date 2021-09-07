@@ -1,11 +1,12 @@
 # VideoApp
-The VideoApp - an application that helps you with creating and storing your personal video list
+The VideoApp - an application that helps you with creating and storing your personal video list  
+Demo -> [VideoApp](https://zibih.github.io/VideoApp/#/)
+
 
 ## About
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.  
 License: [ISC](https://choosealicense.com/licenses/isc/).  
 It uses local storage, YouTube API and Vimeo API.  
-Demo -> [VideoApp](https://zibih.github.io/VideoApp/#/)
 
 ## Run Locally
 1) **Clone the project**
