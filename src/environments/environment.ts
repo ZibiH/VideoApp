@@ -25,4 +25,7 @@ export const environment = {
       clientSecret: 'VIMEO_CLIENT_SECRET',
     },
   ],
+  backend: {
+    url: 'http://localhost:3000/',
+  },
 };
