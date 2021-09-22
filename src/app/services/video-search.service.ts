@@ -23,6 +23,7 @@ export class VideoSearchService {
   private vimeoViewsCount = '0';
   private vimeoService = this.vimeoEnv.service;
   private youtubeService = this.youtubeEnv.service;
+  private backendUrl = this.env.backend.url;
 
   private credentials = btoa(
     `${this.vimeoEnv.clientId}:${this.vimeoEnv.clientSecret}`
@@ -121,23 +122,22 @@ export class VideoSearchService {
     return safeUrl;
   }
 
-  fetchYt() {
-    return this.http.get('http://localhost:3000/youtube/1y5IK2t7NY0').pipe(
-      map((vid) => {
-        return vid;
-      })
-    );
-  }
-
-  fetchVimeo() {
-    return this.http.get('http://localhost:3000/vimeo/2112265').pipe(
-      map((vid) => {
-        return vid;
-      })
-    );
+  fetchVideoData(inputData: InputData) {
+    const videoService = inputData.videoService;
+    const videoId = this.extractIdFromInputData(inputData);
+    return this.http
+      .get<Video>(`${this.backendUrl}${videoService}/${videoId}`)
+      .pipe(
+        map((vid: Video) => {
+          return {
+            ...vid,
+            safeSrc: this.sanitizeVideoSrc(vid.src),
+          };
+        })
+      );
   }
 
   fetchDefaultVideoBase() {
-    return this.http.get<Video[]>('http://localhost:3000/default');
+    return this.http.get<Video[]>(this.backendUrl + 'default');
   }
 }
