@@ -33,15 +33,14 @@ export class VideoInputComponent {
       videoUrl: form.value.videoUrl,
       videoService: form.value.videoService,
     };
-    this.vsService.fetchVideoApiData(videoData).subscribe(
-      (video) => {
+    this.vsService.fetchVideoData(videoData).subscribe(
+      (video: Video) => {
         this.videos = [video];
         this.showingPreview = true;
       },
       (error) => {
         this.errorState = true;
-        const status = error.status;
-        this.fetchApiErrorHandler(status);
+        this.errorMessage = error.error.message;
       }
     );
     form.resetForm();
@@ -50,41 +49,16 @@ export class VideoInputComponent {
   onAddVideo(): void {
     this.videos[0].date = Date.now();
     this.storageService.addVideoToList(this.videos[0]);
-    this.videos = [];
-    this.showingPreview = false;
-    this.errorState = false;
+    this.resetVideoData();
   }
 
   onCancelVideo(): void {
+    this.resetVideoData();
+  }
+
+  private resetVideoData() {
     this.videos = [];
     this.showingPreview = false;
     this.errorState = false;
-  }
-
-  private fetchApiErrorHandler(status: number | undefined): void {
-    const errorMessage0 = 'Wrong url, id or selected service, try again!';
-    const errorMessage400 = 'Wrong service selected, try again!';
-    const errorMessage401 =
-      "Video doesn't exists or you are not authorized to watch it";
-    const errorMessage404 =
-      "Video doesn't exist on selected service, try again!";
-    const errorMessageDefault = 'Something went wrong, try again!';
-    switch (status) {
-      case undefined || 400:
-        this.errorMessage = errorMessage400;
-        break;
-      case 0:
-        this.errorMessage = errorMessage0;
-        break;
-      case 401:
-        this.errorMessage = errorMessage401;
-        break;
-      case 404:
-        this.errorMessage = errorMessage404;
-        break;
-      default:
-        this.errorMessage = errorMessageDefault;
-        break;
-    }
   }
 }
