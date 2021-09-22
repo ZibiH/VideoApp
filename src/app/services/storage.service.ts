@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Subject } from 'rxjs';
 
@@ -10,13 +9,7 @@ import { VideoSearchService } from '@services/video-search.service';
   providedIn: 'root',
 })
 export class StorageService {
-  private videoLocalApiUrl = 'http://localhost:5000/videos';
   private videoLocalStorageKey = 'videos';
-  private videoLocalApiHeaders = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json',
-    }),
-  };
 
   videosStorageListChange = new Subject<Video[]>();
 
