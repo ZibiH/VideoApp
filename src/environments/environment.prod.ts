@@ -16,6 +16,6 @@ export const environment = {
     },
   ],
   backend: {
-    url: 'http://localhost:3000/',
+    url: 'http://videoappserver-env.eba-d39xpuwz.us-east-2.elasticbeanstalk.com/',
   },
 };
