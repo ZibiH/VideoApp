@@ -19,6 +19,8 @@ export class VideoInputComponent {
   showingPreview = false;
   errorMessage: string = '';
   errorState = false;
+  successState = false;
+  successMessage = 'Video added to your list!';
 
   constructor(
     private vsService: VideoSearchService,
@@ -47,18 +49,30 @@ export class VideoInputComponent {
   }
 
   onAddVideo(): void {
+    if (this.storageService.checkLocalStorageVideoItem(this.videos[0])) {
+      this.showingPreview = false;
+      this.errorMessage = 'This video is on your list already!';
+      this.errorState = true;
+      this.resetVideoData(3000);
+      return;
+    }
     this.videos[0].date = Date.now();
     this.storageService.addVideoToList(this.videos[0]);
-    this.resetVideoData();
+    this.showingPreview = false;
+    this.successState = true;
+    this.resetVideoData(3000);
   }
 
   onCancelVideo(): void {
-    this.resetVideoData();
+    this.resetVideoData(100);
   }
 
-  private resetVideoData() {
-    this.videos = [];
-    this.showingPreview = false;
-    this.errorState = false;
+  private resetVideoData(time: number) {
+    setTimeout(() => {
+      this.videos = [];
+      this.showingPreview = false;
+      this.errorState = false;
+      this.successState = false;
+    }, time);
   }
 }

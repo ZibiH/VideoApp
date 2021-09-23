@@ -79,4 +79,9 @@
   <ng-container *ngIf="errorState">
     <mat-error class="search__api-error">{{ errorMessage }}</mat-error>
   </ng-container>
+  <ng-container *ngIf="successState">
+    <div class="search__api-success" color="primary">
+      {{ successMessage }}
+    </div>
+  </ng-container>
 </section>
