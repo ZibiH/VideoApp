@@ -52,7 +52,7 @@
       </button>
     </form>
   </mat-toolbar>
-  <ng-container *ngIf="!errorState">
+  <ng-container>
     <app-video-item
       *ngFor="let vid of videos"
       [video]="vid"
