@@ -16,6 +16,7 @@ export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
   videos: Video[] = [];
   displayStyle = 'preview';
+  isLoading = false;
   showingPreview = false;
   errorMessage: string = '';
   errorState = false;
@@ -30,6 +31,7 @@ export class VideoInputComponent {
   onSubmit(form: NgForm): void {
     this.errorState = false;
     this.showingPreview = false;
+    this.isLoading = true;
 
     const videoData: InputData = {
       videoUrl: form.value.videoUrl,
@@ -38,9 +40,11 @@ export class VideoInputComponent {
     this.vsService.fetchVideoData(videoData).subscribe(
       (video: Video) => {
         this.videos = [video];
+        this.isLoading = false;
         this.showingPreview = true;
       },
       (error) => {
+        this.isLoading = false;
         this.errorState = true;
         this.errorMessage = error.error.message;
       }

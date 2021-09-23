@@ -52,6 +52,7 @@
       </button>
     </form>
   </mat-toolbar>
+  <mat-spinner class="search__spinner" *ngIf="isLoading"></mat-spinner>
   <ng-container>
     <app-video-item
       *ngFor="let vid of videos"

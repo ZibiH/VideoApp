@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -21,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatInputModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatSortModule,
     MatToolbarModule,
@@ -34,6 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatInputModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatSortModule,
     MatToolbarModule,
