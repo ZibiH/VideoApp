@@ -16,6 +16,6 @@ export const environment = {
     },
   ],
   backend: {
-    url: 'http://videoappserver-env.eba-d39xpuwz.us-east-2.elasticbeanstalk.com/',
+    url: 'https://video-app-zh.herokuapp.com/',
   },
 };
