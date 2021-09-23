@@ -29,8 +29,7 @@ export class VideoInputComponent {
   ) {}
 
   onSubmit(form: NgForm): void {
-    this.errorState = false;
-    this.showingPreview = false;
+    this.resetVideoData();
     this.isLoading = true;
 
     const videoData: InputData = {
@@ -54,27 +53,23 @@ export class VideoInputComponent {
 
   onAddVideo(): void {
     if (this.storageService.checkLocalStorageVideoItem(this.videos[0])) {
-      this.errorMessage = 'This video is on your list already!';
+      this.errorMessage = 'This video is already on your list!';
       this.errorState = true;
-      this.resetVideoData(3000);
       return;
     }
     this.videos[0].date = Date.now();
     this.storageService.addVideoToList(this.videos[0]);
     this.successState = true;
-    this.resetVideoData(3000);
   }
 
   onCancelVideo(): void {
-    this.resetVideoData(100);
+    this.resetVideoData();
   }
 
-  private resetVideoData(time: number) {
-    setTimeout(() => {
-      this.videos = [];
-      this.showingPreview = false;
-      this.errorState = false;
-      this.successState = false;
-    }, time);
+  private resetVideoData() {
+    this.videos = [];
+    this.showingPreview = false;
+    this.errorState = false;
+    this.successState = false;
   }
 }
