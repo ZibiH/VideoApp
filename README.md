@@ -1,12 +1,13 @@
 # VideoApp
 The VideoApp - an application that helps you with creating and storing your personal video list  
-Demo -> [VideoApp](https://zibih.github.io/VideoApp/#/)
+**LIVE** -> [VideoApp](https://zibih.github.io/VideoApp/#/)
 
 
 ## About
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.  
 License: [ISC](https://choosealicense.com/licenses/isc/).  
-It uses local storage, YouTube API and Vimeo API.  
+It uses local storage.  
+YouTube and Vimeo API requests are handled by Node server built with use of Express -> [video-app-server](https://github.com/ZibiH/video-app-server) 
 
 ## Run Locally
 1) **Clone the project**
@@ -29,29 +30,10 @@ or fork it and then use your own link
   npm install
 ```
 
-4) **Environment Variables**
-
-To make the most of this project, you will need to replace the following environment variables in `src/environments/environment.ts` file:
-
-- YOUTUBE_API_KEY
-- VIMEO_CLIENT_ID
-- VIMEO_CLIENT_SECRET
-
-  with your own credentials.
-
-More informations about how to get these credentials you can find here:
-
-- [YOUTUBE API](https://developers.google.com/youtube/v3/getting-started)
-- [VIMEO API](https://developer.vimeo.com/api/guides/start#generate-access-token)
-
-Without providing credentials the use of the VideoApp is limited and alows you to upload and work with the default video list - check the [Features](#features) section
-
-5) **Start the server**
+4) **Start the server**
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 The app will automatically reload if you change any of the source files.
-
-You can also run a local server. Run `npm run server` and navigate to `http://localhost:5000/videos` to check the default video list.
 
 ## Build
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
