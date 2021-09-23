@@ -50,7 +50,6 @@ export class VideoInputComponent {
 
   onAddVideo(): void {
     if (this.storageService.checkLocalStorageVideoItem(this.videos[0])) {
-      this.showingPreview = false;
       this.errorMessage = 'This video is on your list already!';
       this.errorState = true;
       this.resetVideoData(3000);
@@ -58,7 +57,6 @@ export class VideoInputComponent {
     }
     this.videos[0].date = Date.now();
     this.storageService.addVideoToList(this.videos[0]);
-    this.showingPreview = false;
     this.successState = true;
     this.resetVideoData(3000);
   }
