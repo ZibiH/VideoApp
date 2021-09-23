@@ -29,6 +29,7 @@
           required
           aria-required="true"
           aria-label="choose video service"
+          placeholder="service"
         >
           <mat-option>---</mat-option>
           <mat-option value="youtube">Youtube</mat-option>
@@ -51,7 +52,8 @@
       </button>
     </form>
   </mat-toolbar>
-  <ng-container *ngIf="!errorState">
+  <mat-spinner class="search__spinner" *ngIf="isLoading"></mat-spinner>
+  <ng-container>
     <app-video-item
       *ngFor="let vid of videos"
       [video]="vid"
@@ -77,5 +79,10 @@
   </ng-container>
   <ng-container *ngIf="errorState">
     <mat-error class="search__api-error">{{ errorMessage }}</mat-error>
+  </ng-container>
+  <ng-container *ngIf="successState">
+    <div class="search__api-success">
+      {{ successMessage }}
+    </div>
   </ng-container>
 </section>

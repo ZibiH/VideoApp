@@ -16,9 +16,12 @@ export class VideoInputComponent {
   videoService = new FormControl('', Validators.required);
   videos: Video[] = [];
   displayStyle = 'preview';
+  isLoading = false;
   showingPreview = false;
   errorMessage: string = '';
   errorState = false;
+  successState = false;
+  successMessage = 'Video added to your list!';
 
   constructor(
     private vsService: VideoSearchService,
@@ -26,65 +29,47 @@ export class VideoInputComponent {
   ) {}
 
   onSubmit(form: NgForm): void {
-    this.errorState = false;
-    this.showingPreview = false;
+    this.resetVideoData();
+    this.isLoading = true;
 
     const videoData: InputData = {
       videoUrl: form.value.videoUrl,
       videoService: form.value.videoService,
     };
-    this.vsService.fetchVideoApiData(videoData).subscribe(
-      (video) => {
+    this.vsService.fetchVideoData(videoData).subscribe(
+      (video: Video) => {
         this.videos = [video];
+        this.isLoading = false;
         this.showingPreview = true;
       },
       (error) => {
+        this.isLoading = false;
         this.errorState = true;
-        const status = error.status;
-        this.fetchApiErrorHandler(status);
+        this.errorMessage = error.error.message;
       }
     );
     form.resetForm();
   }
 
   onAddVideo(): void {
+    if (this.storageService.checkLocalStorageVideoItem(this.videos[0])) {
+      this.errorMessage = 'This video is already on your list!';
+      this.errorState = true;
+      return;
+    }
     this.videos[0].date = Date.now();
     this.storageService.addVideoToList(this.videos[0]);
-    this.videos = [];
-    this.showingPreview = false;
-    this.errorState = false;
+    this.successState = true;
   }
 
   onCancelVideo(): void {
+    this.resetVideoData();
+  }
+
+  private resetVideoData() {
     this.videos = [];
     this.showingPreview = false;
     this.errorState = false;
-  }
-
-  private fetchApiErrorHandler(status: number | undefined): void {
-    const errorMessage0 = 'Wrong url, id or selected service, try again!';
-    const errorMessage400 = 'Wrong service selected, try again!';
-    const errorMessage401 =
-      "Video doesn't exists or you are not authorized to watch it";
-    const errorMessage404 =
-      "Video doesn't exist on selected service, try again!";
-    const errorMessageDefault = 'Something went wrong, try again!';
-    switch (status) {
-      case undefined || 400:
-        this.errorMessage = errorMessage400;
-        break;
-      case 0:
-        this.errorMessage = errorMessage0;
-        break;
-      case 401:
-        this.errorMessage = errorMessage401;
-        break;
-      case 404:
-        this.errorMessage = errorMessage404;
-        break;
-      default:
-        this.errorMessage = errorMessageDefault;
-        break;
-    }
+    this.successState = false;
   }
 }
